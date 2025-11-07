@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ControladorProducto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ventasdao/dominio/Conexion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Producto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventasDAO.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventasDAO.ipr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventasDAO.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/VentasDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/VentasDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/CategoriaControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/CategoriaControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/ClienteControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ClienteControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/ICrud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ICrud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/dominio/ConnectionFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Factura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/GrillaCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/GrillaCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ventasDAO.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/ventasDAO.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ventasDAO.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ventasDAO.iws" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,9 +25,6 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="ventasDAO" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -193,12 +181,17 @@
       <select />
     </treeState>
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
+  <component name="ProjectId" id="3585iLybosdTBd3zMjXSCmYvWKe" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -256,26 +249,21 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../postgresql-42.2.16.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.VentasDAO.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/patriciorios/Proyectos/Universidad/VentasDAO"
+  }
+}]]></component>
   <component name="RunManager" selected="Application.VentasDAO">
     <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ventasdao.ui.Principal" />
@@ -374,14 +362,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ventasdao/dominio/Conexion.java</url>
-          <line>36</line>
-          <properties />
+          <line>32</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ventasdao/VentasDAO.java</url>
           <line>24</line>
-          <properties />
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

@@ -7,10 +7,14 @@ package ventasdao.ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ventasdao.controladores.ICrud;
+import ventasdao.controladores.mocks.FacturaControladorMock;
+import ventasdao.objetos.Factura;
 import ventasdao.ui.abm.AbmCategoria;
 import ventasdao.ui.abm.AbmCliente;
 import ventasdao.ui.abm.AbmCliente;
 import ventasdao.ui.abm.AbmProducto;
+import ventasdao.ui.abm.FacturaScreen;
 
 /**
  *
@@ -21,7 +25,12 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    
+    private ICrud<Factura> facturaCrud;
     public Principal() {
+        
+        facturaCrud = new FacturaControladorMock();
+        
         initComponents();
     }
 
@@ -40,6 +49,8 @@ public class Principal extends javax.swing.JFrame {
         jmiCategoria = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jmiProducto = new javax.swing.JMenuItem();
+        FacturaItem = new javax.swing.JMenuItem();
+        TipoCliente = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,11 +58,11 @@ public class Principal extends javax.swing.JFrame {
         jdpContenedorPrincipal.setLayout(jdpContenedorPrincipalLayout);
         jdpContenedorPrincipalLayout.setHorizontalGroup(
             jdpContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 1200, Short.MAX_VALUE)
         );
         jdpContenedorPrincipalLayout.setVerticalGroup(
             jdpContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 442, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
         jMenu1.setText("File");
@@ -85,6 +96,22 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jmiProducto);
 
+        FacturaItem.setText("Factura");
+        FacturaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FacturaItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(FacturaItem);
+
+        TipoCliente.setText("Tipo Cliente");
+        TipoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TipoClienteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(TipoCliente);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -109,7 +136,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jmiCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCategoriaActionPerformed
         // TODO add your handling code here:
-        
+
         AbmCategoria abmCategoria = new AbmCategoria();
         jdpContenedorPrincipal.add(abmCategoria);
         abmCategoria.setVisible(true);
@@ -125,10 +152,10 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
-        
-        
+
+
+
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jmiProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiProductoActionPerformed
@@ -136,12 +163,23 @@ public class Principal extends javax.swing.JFrame {
         AbmProducto abmProducto = new AbmProducto();
         jdpContenedorPrincipal.add(abmProducto);
         abmProducto.setVisible(true);
-      
+
     }//GEN-LAST:event_jmiProductoActionPerformed
 
     private void jmiProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiProductoMouseClicked
-      
+
     }//GEN-LAST:event_jmiProductoMouseClicked
+
+    private void FacturaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturaItemActionPerformed
+        // TODO add your handling code here:
+        FacturaScreen facturaScreen = new FacturaScreen(this.facturaCrud);
+        jdpContenedorPrincipal.add(facturaScreen);
+        facturaScreen.setVisible(true);
+    }//GEN-LAST:event_FacturaItemActionPerformed
+
+    private void TipoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TipoClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TipoClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +188,7 @@ public class Principal extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -179,6 +217,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem FacturaItem;
+    private javax.swing.JMenuItem TipoCliente;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
