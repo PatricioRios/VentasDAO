@@ -5,17 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos">
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Factura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/build-impl.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/FacturaControladorMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/FacturaControladorMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/LineaFactura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/LineaFactura.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventasDAO.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/ventasDAO.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaScreen.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/FacturaGrilla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/FacturaGrilla.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ventasDAO.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ventasDAO.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -255,15 +257,16 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.VentasDAO.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/patriciorios/Proyectos/Universidad/VentasDAO"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.VentasDAO.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/patriciorios/Proyectos/Universidad/VentasDAO&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.VentasDAO">
     <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ventasdao.ui.Principal" />

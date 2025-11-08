@@ -18,12 +18,14 @@ Para iniciar los servicios luego de haberlos apagado con el comando anterior:
 ```
 docker compose start
 ```
-Para bajar (borrar los servicios de tu maquina junto a los volumentes (datos))
+Para bajar ("-v" para borrar los servicios de tu maquina junto a los volumentes (datos))
 ```
 docker compose down -v
 ```
 
 ## Credenciales de la base de datos
 usuario: postgres
+
 contraseña: admin
+
 puerto: 5432

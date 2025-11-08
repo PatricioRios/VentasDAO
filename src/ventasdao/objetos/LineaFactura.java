@@ -5,6 +5,7 @@ public class LineaFactura {
     private Integer id;
     
     private Double cantidad;
+    private Integer facturaId;
     
     private Producto producto;
 
@@ -30,6 +31,21 @@ public class LineaFactura {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    public LineaFactura(Integer id, Double cantidad, Producto producto, Integer facturaId) {
+        this.id = id;
+        this.cantidad = cantidad;
+        this.producto = producto;
+        this.facturaId = facturaId;
+    }
+
+    public Integer getFacturaId() {
+        return facturaId;
+    }
+
+    public void setFacturaId(Integer facturaId) {
+        this.facturaId = facturaId;
     }
     
 }

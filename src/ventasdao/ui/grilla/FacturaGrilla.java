@@ -55,7 +55,8 @@ public class FacturaGrilla extends AbstractTableModel {
             default: return "";
         }
     }
-    
-    
+    public Factura getFacturaByIndex(Integer index){
+        return this.facturas.get(index);
+    }
     
 }

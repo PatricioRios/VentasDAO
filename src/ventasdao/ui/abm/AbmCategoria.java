@@ -39,7 +39,7 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         }
 
         grillaCategoria = new GrillaCategoria(categorias);
-        jtListadoCategorias.setModel(grillaCategoria);
+        TablaDeCategorias.setModel(grillaCategoria);
     }
     
     public void limpiarCampos(){
@@ -62,10 +62,10 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jtfDenominacion = new javax.swing.JTextField();
         jtfDescripcion = new javax.swing.JTextField();
-        jbAltaCategoria = new javax.swing.JButton();
+        AgregarButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtListadoCategorias = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        TablaDeCategorias = new javax.swing.JTable();
+        ModificarButton = new javax.swing.JButton();
         jtfId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
@@ -81,19 +81,19 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
             }
         });
 
-        jbAltaCategoria.setText("Agregar");
-        jbAltaCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+        AgregarButton.setText("Agregar");
+        AgregarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbAltaCategoriaMouseClicked(evt);
+                AgregarButtonMouseClicked(evt);
             }
         });
-        jbAltaCategoria.addActionListener(new java.awt.event.ActionListener() {
+        AgregarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAltaCategoriaActionPerformed(evt);
+                AgregarButtonActionPerformed(evt);
             }
         });
 
-        jtListadoCategorias.setModel(new javax.swing.table.DefaultTableModel(
+        TablaDeCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -104,17 +104,17 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtListadoCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaDeCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtListadoCategoriasMouseClicked(evt);
+                TablaDeCategoriasMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtListadoCategorias);
+        jScrollPane1.setViewportView(TablaDeCategorias);
 
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ModificarButton.setText("Modificar");
+        ModificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ModificarButtonActionPerformed(evt);
             }
         });
 
@@ -136,9 +136,9 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jbAltaCategoria)
+                        .addComponent(AgregarButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(ModificarButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -172,8 +172,8 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                             .addComponent(jtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbAltaCategoria)
-                            .addComponent(jButton1)))
+                            .addComponent(AgregarButton)
+                            .addComponent(ModificarButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -183,7 +183,7 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_jbAltaCategoriaActionPerformed
+    private void AgregarButtonActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_AgregarButtonActionPerformed
         
         
         // TODO add your handling code here:
@@ -201,29 +201,31 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         }
 
         try {
-            jtListadoCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
+            TablaDeCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }//GEN-LAST:event_jbAltaCategoriaActionPerformed
+    }//GEN-LAST:event_AgregarButtonActionPerformed
 
-    private void jbAltaCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAltaCategoriaMouseClicked
+    private void AgregarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarButtonMouseClicked
      
-    }//GEN-LAST:event_jbAltaCategoriaMouseClicked
+    }//GEN-LAST:event_AgregarButtonMouseClicked
 
-    private void jtListadoCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoCategoriasMouseClicked
+    private void TablaDeCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDeCategoriasMouseClicked
         
-       Categoria categoria = grillaCategoria.getCategoriaFromRow(jtListadoCategorias.getSelectedRow());
+       Categoria categoria = grillaCategoria.getCategoriaFromRow(TablaDeCategorias.getSelectedRow());
        
        jtfDenominacion.setText(categoria.getDenominacion());
        jtfDescripcion.setText(categoria.getDescripcion());
        jtfId.setText( categoria.getId().toString() );
        
+        System.out.println("Id: " + categoria.getId());
+       
       
         
-    }//GEN-LAST:event_jtListadoCategoriasMouseClicked
+    }//GEN-LAST:event_TablaDeCategoriasMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ModificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarButtonActionPerformed
         try {
             // TODO add your handling code here:
             
@@ -240,11 +242,11 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         }
         
         try {
-            jtListadoCategorias.setModel( new GrillaCategoria( categoriaControlador.listar() ));
+            TablaDeCategorias.setModel( new GrillaCategoria( categoriaControlador.listar() ));
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ModificarButtonActionPerformed
 
     private void jtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdActionPerformed
         // TODO add your handling code here:
@@ -256,13 +258,13 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton AgregarButton;
+    private javax.swing.JButton ModificarButton;
+    private javax.swing.JTable TablaDeCategorias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbAltaCategoria;
-    private javax.swing.JTable jtListadoCategorias;
     private javax.swing.JTextField jtfDenominacion;
     private javax.swing.JTextField jtfDescripcion;
     private javax.swing.JTextField jtfId;
