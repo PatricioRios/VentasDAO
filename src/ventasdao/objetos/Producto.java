@@ -66,4 +66,25 @@ public class Producto {
     public void setPrecio(Float precio) {
         this.precio = precio;
     }
+    public Producto(Integer id, String nombre, String descripcion, Float precio, Date fechaCreacion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.fechaCreacion = fechaCreacion;
+    }
+    public Producto() {
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", categoria=" + categoria +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio=" + precio +
+                ", fechaCreacion=" + fechaCreacion +
+                '}';
+    }
 }

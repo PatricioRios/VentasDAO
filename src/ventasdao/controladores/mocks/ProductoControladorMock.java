@@ -123,4 +123,38 @@ public class ProductoControladorMock implements ICrud<Producto> {
     public List<Producto> listar() throws SQLException, Exception {
         return new ArrayList<>(productos);
     }
+
+    public List<Producto> listarPorCategoria(Categoria categoria) throws SQLException, Exception {
+        List<Producto> productosFiltrados = new ArrayList<>();
+        for (Producto producto : productos) {
+            if (producto.getCategoria().getId().equals(categoria.getId())) {
+                productosFiltrados.add(producto);
+            }
+        }
+        return productosFiltrados;
+    }
+
+    public List<Producto> nameStartsWith(String prefix) throws SQLException, Exception {
+        List<Producto> productosFiltrados = new ArrayList<>();
+        for (Producto producto : productos) {
+            System.out.println("Checking product: " + producto.getNombre() + " against prefix: " + prefix);
+            if (producto.getNombre().toLowerCase().startsWith(prefix.toLowerCase())) {
+                productosFiltrados.add(producto);
+            }
+        }
+        return productosFiltrados;
+    }
+
+    public List<Producto> filterByNameAndCategory(String prefix, Categoria categoria) throws SQLException, Exception {
+        List<Producto> productosFiltrados = new ArrayList<>();
+        for (Producto producto : productos) {
+            boolean nameMatches = producto.getNombre().toLowerCase().startsWith(prefix.toLowerCase());
+            boolean categoryMatches = (categoria == null) || (producto.getCategoria() != null && producto.getCategoria().getId().equals(categoria.getId()));
+
+            if (nameMatches && categoryMatches) {
+                productosFiltrados.add(producto);
+            }
+        }
+        return productosFiltrados;
+    }
 }

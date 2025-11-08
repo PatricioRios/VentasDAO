@@ -51,7 +51,6 @@ public class LineaGrilla extends AbstractTableModel {
                 return "";
         }
     }
-    
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -72,5 +71,9 @@ public class LineaGrilla extends AbstractTableModel {
             default:
                 return "";
         }
+    }
+
+    public LineaFactura getLineaFacturaByIndex(Integer selectedRow) {
+        return lineas.get(selectedRow);
     }
 }

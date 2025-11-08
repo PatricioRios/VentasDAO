@@ -5,19 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/build-impl.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ventasdao/ui/Tasks.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/ProductoGrillaOnFacturaScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/FacturaControladorMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/FacturaControladorMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/ProductoControladorMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/ProductoControladorMock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/LineaFactura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/LineaFactura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Producto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaScreen.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/FacturaGrilla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/FacturaGrilla.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/LineaGrilla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/LineaGrilla.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ventasDAO.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ventasDAO.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -259,15 +256,20 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.Principal.executor&quot;: &quot;Run&quot;,
     &quot;Application.VentasDAO.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;875&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/patriciorios/Proyectos/Universidad/VentasDAO&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/patriciorios/Proyectos/Universidad/VentasDAO/lib/postgresql-42.7.8.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.VentasDAO">
+  <component name="RunManager" selected="Application.Principal">
     <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ventasdao.ui.Principal" />
       <module name="ventasDAO" />
@@ -304,8 +306,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.VentasDAO" />
         <item itemvalue="Application.Principal" />
+        <item itemvalue="Application.VentasDAO" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -363,11 +365,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ventasdao/dominio/Conexion.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ventasdao/VentasDAO.java</url>
           <line>24</line>

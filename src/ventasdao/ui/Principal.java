@@ -5,12 +5,15 @@
  */
 package ventasdao.ui;
 
-import java.awt.CardLayout;
+import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ventasdao.controladores.ICrud;
+import ventasdao.controladores.mocks.CategoriaControladorMock;
 import ventasdao.controladores.mocks.FacturaControladorMock;
 import ventasdao.controladores.mocks.LineaFacturaControladorMock;
+import ventasdao.controladores.mocks.ProductoControladorMock;
+import ventasdao.objetos.Categoria;
 import ventasdao.objetos.Factura;
 import ventasdao.ui.abm.AbmCategoria;
 import ventasdao.ui.abm.AbmCliente;
@@ -38,10 +41,19 @@ public class Principal extends javax.swing.JFrame {
     
     private ICrud<Factura> facturaCrud;
     private LineaFacturaControladorMock lineaFacturaControlador;
+    private ProductoControladorMock productoControladorMock;
+
+    private ICrud<Categoria> categoriaCrud;
     public Principal() {
         this.lineaFacturaControlador = new LineaFacturaControladorMock();
         this.facturaCrud = new FacturaControladorMock();
-        
+        this.categoriaCrud = new CategoriaControladorMock();
+        try {
+            this.productoControladorMock = new ProductoControladorMock();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         initComponents();
 
         
@@ -172,9 +184,24 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NavFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavFacturasActionPerformed
-        FacturaInternalLayaut facturaScreen = new FacturaInternalLayaut(this.facturaCrud,this.lineaFacturaControlador);
+        FacturaInternalLayaut facturaScreen = new FacturaInternalLayaut(
+                this.facturaCrud,
+                this.lineaFacturaControlador,
+                this.productoControladorMock,
+                this.categoriaCrud
+        );
         MainContainer.add(facturaScreen);
+        facturaScreen.setPreferredSize(
+                new Dimension(
+                        this.MainContainer.getWidth(),
+                        this.MainContainer.getHeight()-50
+                )
+        );
+        facturaScreen.setLocation(
+                (MainContainer.getWidth() - facturaScreen.getWidth()) / 2,50);
         facturaScreen.setVisible(true);
+
+
     }//GEN-LAST:event_NavFacturasActionPerformed
 
     private void NavTipoClienteButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavTipoClienteButonActionPerformed
