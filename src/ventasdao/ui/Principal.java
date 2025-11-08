@@ -9,17 +9,12 @@ import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ventasdao.controladores.ICrud;
-import ventasdao.controladores.mocks.CategoriaControladorMock;
-import ventasdao.controladores.mocks.FacturaControladorMock;
-import ventasdao.controladores.mocks.LineaFacturaControladorMock;
-import ventasdao.controladores.mocks.ProductoControladorMock;
+import ventasdao.controladores.mocks.*;
 import ventasdao.objetos.Categoria;
 import ventasdao.objetos.Factura;
-import ventasdao.ui.abm.AbmCategoria;
+import ventasdao.objetos.TipoCliente;
+import ventasdao.ui.abm.*;
 import ventasdao.ui.abm.AbmCliente;
-import ventasdao.ui.abm.AbmCliente;
-import ventasdao.ui.abm.AbmProducto;
-import ventasdao.ui.abm.FacturaInternalLayaut;
 
 /**
  *
@@ -42,12 +37,14 @@ public class Principal extends javax.swing.JFrame {
     private ICrud<Factura> facturaCrud;
     private LineaFacturaControladorMock lineaFacturaControlador;
     private ProductoControladorMock productoControladorMock;
+    private ICrud<TipoCliente> tipoClienteICrud;
 
     private ICrud<Categoria> categoriaCrud;
     public Principal() {
         this.lineaFacturaControlador = new LineaFacturaControladorMock();
         this.facturaCrud = new FacturaControladorMock();
         this.categoriaCrud = new CategoriaControladorMock();
+        this.tipoClienteICrud = new TipoClienteControladorMock();
         try {
             this.productoControladorMock = new ProductoControladorMock();
         } catch (Exception e) {
@@ -197,15 +194,25 @@ public class Principal extends javax.swing.JFrame {
                         this.MainContainer.getHeight()-50
                 )
         );
-        facturaScreen.setLocation(
-                (MainContainer.getWidth() - facturaScreen.getWidth()) / 2,50);
+        facturaScreen.setLocation((MainContainer.getWidth() - facturaScreen.getWidth()) / 2,50);
         facturaScreen.setVisible(true);
 
 
     }//GEN-LAST:event_NavFacturasActionPerformed
 
     private void NavTipoClienteButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavTipoClienteButonActionPerformed
-        // TODO add your handling code here:
+        try {
+            ClienteTipoAbm abmCliente = new ClienteTipoAbm(this.tipoClienteICrud) ;
+            MainContainer.add(abmCliente);
+            Point location = new Point(
+                    (MainContainer.getWidth() - abmCliente.getWidth()) / 2,
+                    50
+            );
+            abmCliente.setLocation(location);
+            abmCliente.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_NavTipoClienteButonActionPerformed
 
     private void NavClientesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavClientesButtonActionPerformed

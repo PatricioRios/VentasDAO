@@ -4,18 +4,37 @@
  */
 package ventasdao.ui.abm;
 
+import ventasdao.controladores.ICrud;
+import ventasdao.objetos.TipoCliente;
+import ventasdao.ui.grilla.TipoClienteGrilla;
+
 /**
  *
  * @author patriciorios
  */
 public class ClienteTipoAbm extends javax.swing.JInternalFrame {
 
+
+    private ICrud<TipoCliente> tipoClienteControlador;
+    private TipoClienteGrilla tipoClienteGrilla;
+    private TipoCliente selectedTipoCliente;
     /**
      * Creates new form ClienteTipoAbm
      */
-    public ClienteTipoAbm() {
+    public ClienteTipoAbm(
+        ICrud<TipoCliente> tipoClienteControlador
+    ){
+        this.tipoClienteControlador = tipoClienteControlador;
         initComponents();
+
+        try {
+            this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
+            tipoClienteTable.setModel(tipoClienteGrilla);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,25 +46,39 @@ public class ClienteTipoAbm extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        nombreClienteTipoTextField = new javax.swing.JTextField();
+        tipoClienteTable = new javax.swing.JTable();
+        nombreTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         selectedClientTipeIdText = new javax.swing.JLabel();
-        descripcionClienteTipoTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        crearButton = new javax.swing.JButton();
+        actualizarButton = new javax.swing.JButton();
+        eliminarButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        descripcionTextArea = new javax.swing.JTextArea();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        setClosable(true);
+
+        tipoClienteTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "nombre", "Descripcion"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tipoClienteTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tipoClienteTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tipoClienteTable);
+        if (tipoClienteTable.getColumnModel().getColumnCount() > 0) {
+            tipoClienteTable.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jLabel1.setText("nombre");
 
@@ -53,52 +86,156 @@ public class ClienteTipoAbm extends javax.swing.JInternalFrame {
 
         jLabel2.setText("descripcion");
 
+        crearButton.setText("Crear Nuevo");
+        crearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearButtonActionPerformed(evt);
+            }
+        });
+
+        actualizarButton.setText("Actualizar");
+        actualizarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarButtonActionPerformed(evt);
+            }
+        });
+
+        eliminarButton.setText("Eliminar");
+        eliminarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarButtonActionPerformed(evt);
+            }
+        });
+
+        descripcionTextArea.setColumns(20);
+        descripcionTextArea.setRows(5);
+        jScrollPane2.setViewportView(descripcionTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nombreClienteTipoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(selectedClientTipeIdText)
                     .addComponent(jLabel2)
-                    .addComponent(descripcionClienteTipoTextField))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectedClientTipeIdText)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(actualizarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(crearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(eliminarButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(selectedClientTipeIdText)
                         .addGap(17, 17, 17)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreClienteTipoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(descripcionClienteTipoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(actualizarButton)
+                            .addComponent(crearButton))
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarButton)))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tipoClienteTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tipoClienteTableMouseClicked
+        int selectedRow = tipoClienteTable.getSelectedRow();
+        if (selectedRow >= 0) {
+            this.selectedTipoCliente = this.tipoClienteGrilla.getTipoClienteAt(selectedRow);
+
+            refreshClienteTipoDetails();
+
+        }
+    }//GEN-LAST:event_tipoClienteTableMouseClicked
+
+    private void refreshClienteTipoDetails() {
+        if (this.selectedTipoCliente != null) {
+            this.selectedClientTipeIdText.setText("id: " + this.selectedTipoCliente.getId());
+            this.nombreTextField.setText(this.selectedTipoCliente.getNombre());
+            this.descripcionTextArea.setText(this.selectedTipoCliente.getDescripcion());
+        } else {
+            this.selectedClientTipeIdText.setText("id: ");
+            this.nombreTextField.setText("");
+            this.descripcionTextArea.setText("");
+        }
+    }
+
+    private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
+        TipoCliente nuevoTipoCliente = new TipoCliente();
+        nuevoTipoCliente.setNombre(this.nombreTextField.getText());
+        nuevoTipoCliente.setDescripcion(this.descripcionTextArea.getText());
+        try {
+            this.tipoClienteControlador.crear(nuevoTipoCliente);
+            this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
+            tipoClienteTable.setModel(tipoClienteGrilla);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_crearButtonActionPerformed
+
+    private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
+        if (this.selectedTipoCliente != null) {
+            this.selectedTipoCliente.setNombre(this.nombreTextField.getText());
+            this.selectedTipoCliente.setDescripcion(this.descripcionTextArea.getText());
+            try {
+                this.tipoClienteControlador.modificar(this.selectedTipoCliente);
+                this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
+                tipoClienteTable.setModel(tipoClienteGrilla);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_actualizarButtonActionPerformed
+
+    private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
+        if (this.selectedTipoCliente != null) {
+            try {
+                this.tipoClienteControlador.eliminar(this.selectedTipoCliente);
+                this.selectedTipoCliente = null;
+                refreshClienteTipoDetails();
+                this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
+                tipoClienteTable.setModel(tipoClienteGrilla);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_eliminarButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField descripcionClienteTipoTextField;
+    private javax.swing.JButton actualizarButton;
+    private javax.swing.JButton crearButton;
+    private javax.swing.JTextArea descripcionTextArea;
+    private javax.swing.JButton eliminarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField nombreClienteTipoTextField;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField nombreTextField;
     private javax.swing.JLabel selectedClientTipeIdText;
+    private javax.swing.JTable tipoClienteTable;
     // End of variables declaration//GEN-END:variables
 }
