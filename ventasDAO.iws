@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos">
-      <change afterPath="$PROJECT_DIR$/src/ventasdao/ui/Tasks.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/ProductoGrillaOnFacturaScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/FacturaControladorMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/FacturaControladorMock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/ProductoControladorMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/ProductoControladorMock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/LineaFactura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/LineaFactura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/LineaGrilla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/LineaGrilla.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ventasDAO.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ventasDAO.iws" afterDir="false" />
-    </list>
+    <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
