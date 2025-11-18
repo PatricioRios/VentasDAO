@@ -15,9 +15,16 @@ import ventasdao.objetos.Producto;
  */
 public class GrillaProducto extends AbstractTableModel{
         private ArrayList<Producto> productos = new ArrayList<>();
-    
-    
-    
+
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<Producto> productos) {
+        this.productos = productos;
+    }
+
     public GrillaProducto(ArrayList<Producto> datos) {
         this.productos = datos;
     }
@@ -62,5 +69,9 @@ public class GrillaProducto extends AbstractTableModel{
         
         
         } //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Producto getProductByIndex(int index){
+        return productos.get(index);
     }
 }

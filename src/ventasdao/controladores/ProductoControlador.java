@@ -73,7 +73,24 @@ public class ProductoControlador implements ICrud<Producto>{
     }
 
     @Override
-    public boolean modificar(Producto entidad) {
+    public boolean modificar(Producto entidad) throws SQLException, ClassNotFoundException {
+
+        connection = Conexion.obtenerConexion();
+        String sql = "UPDATE productos SET nombre=?, descripcion=?, precio=?, categoria_id=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement (sql);
+            ps.setString(1, entidad.getNombre());
+            ps.setString(2, entidad.getDescripcion());
+            ps.setFloat(3, entidad.getPrecio());
+            ps.setInt(4, entidad.getCategoria().getId());
+            ps.setInt(5, entidad.getId());
+            ps.executeUpdate();
+            connection.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return false;
     }
 
@@ -99,7 +116,7 @@ public class ProductoControlador implements ICrud<Producto>{
                 producto.setPrecio (resultSet.getFloat("precio"));
                 producto.setFechaCreacion(resultSet.getDate("fecha_creacion"));
                 producto.setCategoria(getCategoria(resultSet.getInt("categoria_id")));
-                        //System.out.println(cliente);
+
 
                 productos.add(producto);
                 

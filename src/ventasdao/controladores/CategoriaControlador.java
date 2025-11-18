@@ -57,7 +57,7 @@ public class CategoriaControlador implements ICrud<Categoria>{
                 categoria.setDescripcion(rs.getString("descripcion"));
                 categoria.setId(rs.getInt("id"));
                 
-                        //System.out.println(cliente);
+
                 
                 
                 categorias.add(categoria);

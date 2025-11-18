@@ -6,6 +6,7 @@
 package ventasdao.ui.grilla;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import ventasdao.objetos.Cliente;
 
@@ -15,15 +16,21 @@ import ventasdao.objetos.Cliente;
  */
 public class GrillaCliente extends AbstractTableModel{
     
-    private ArrayList<Cliente> clientes = new ArrayList<>();
+    private List<Cliente> clientes = new ArrayList<>();
     
     
     
-    public GrillaCliente(ArrayList<Cliente> datos) {
+    public GrillaCliente(List<Cliente> datos) {
         this.clientes = datos;
     }
-    
-    
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
 
     @Override
     public int getRowCount() {
@@ -61,6 +68,10 @@ public class GrillaCliente extends AbstractTableModel{
         
         
         } //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Cliente getClienteAt(int rowIndex){
+        return clientes.get(rowIndex);
     }
     
 }

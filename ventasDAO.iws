@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos" />
+    <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos">
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/CategoriaControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/CategoriaControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/ClienteControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ClienteControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/ProductoControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ProductoControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/TipoClienteControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/TipoClienteControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/ClienteControladorMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/ClienteControladorMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/ProductoControladorMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/mocks/ProductoControladorMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Categoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Factura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmUsuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/ClienteTipoAbm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmTipoCliente.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/ClienteTipoAbm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmTipoCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmFactura.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/FacturaInternalLayaut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmFactura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/GrillaCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/GrillaCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/GrillaProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/GrillaProducto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ventasDAO.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ventasDAO.iws" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -248,9 +273,11 @@
     &quot;Application.VentasDAO.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;false&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;false&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;875&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/patriciorios/Proyectos/Universidad/VentasDAO/lib/postgresql-42.7.8.jar&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;tipo-cliente-feature&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/patriciorios/Proyectos/Universidad/trabajo_final/backend&quot;,
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,

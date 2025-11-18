@@ -7,7 +7,10 @@ package ventasdao.ui.abm;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 import ventasdao.controladores.ICrud;
 import ventasdao.controladores.mocks.LineaFacturaControladorMock;
@@ -22,7 +25,7 @@ import ventasdao.ui.grilla.ProductoGrillaOnFacturaScreen;
  *
  * @author patriciorios
  */
-public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
+public class AbmFactura extends javax.swing.JInternalFrame {
     private FacturaGrilla facturaGrilla;
     private DefaultComboBoxModel modelCombo;
     private DefaultComboBoxModel categoriaFilterComboBoxModel;
@@ -36,7 +39,7 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
     private ProductoGrillaOnFacturaScreen productoGrilla;
 
     private ICrud<Categoria> categoriaCrud;
-    public FacturaInternalLayaut(
+    public AbmFactura(
             ICrud<Factura> facturaCrud,
             LineaFacturaControladorMock lineaFacturaCrud,
             ProductoControladorMock productoICrud,
@@ -52,12 +55,13 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
                     this.facturaCrud.listar()
             );
         } catch (Exception ex) {
-            //System.getLogger(FacturaInternalLayaut.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al cargar las facturas", "Error", JOptionPane.ERROR_MESSAGE);
         }
         initComponents();
         this.FacturasTable.setModel(this.facturaGrilla);
         
-        this.FacturasTable.getColumnModel().getColumn(0).setPreferredWidth(5);
+        this.FacturasTable.getColumnModel().getColumn(0).setPreferredWidth(15);
 
 
         this.tiposDePago.add(TipoDePagoDeFactura.DEBITO);
@@ -69,7 +73,8 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
         try {
             this.productoGrilla = new ProductoGrillaOnFacturaScreen(this.productoICrud.listar());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al cargar los productos", "Error", JOptionPane.ERROR_MESSAGE);
         }
         this.productoTable.setModel(this.productoGrilla);
         javax.swing.table.TableColumn column = this.productoTable.getColumnModel().getColumn(0);
@@ -79,11 +84,24 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
             this.categoriaFilterComboBoxModel = new DefaultComboBoxModel(this.categoriaCrud.listar().toArray());
             this.categoriaFilterComboBox.setModel(this.categoriaFilterComboBoxModel);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al cargar las categorias", "Error", JOptionPane.ERROR_MESSAGE);
         }
         this.FacturasTable.getColumnModel().getColumn(0).setPreferredWidth(15);
         this.FacturasTable.getColumnModel().getColumn(0).setResizable(false);
 
+    }
+
+    private boolean validateLineaFactura(){
+        if(selectedLineaFactura.getProducto() == null || selectedLineaFactura.getProducto().getId() == 0){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if((Integer)cantidadProductoSpinner.getValue() <= 0){
+            JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor a 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -452,23 +470,26 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
 
             facturaCrud.crear(emptyFactura);
         } catch (Exception e){
-            e.printStackTrace();
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al crear la factura", "Error", JOptionPane.ERROR_MESSAGE);
         }
         try {
             this.facturaGrilla = new FacturaGrilla(this.facturaCrud.listar());
             this.FacturasTable.setModel(this.facturaGrilla);
         } catch (Exception ex) {
-            //System.getLogger(FacturaInternalLayaut.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al cargar las facturas", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_CreateFacturaButtonActionPerformed
 
     private void updateFacturaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFacturaButtonActionPerformed
         try {
             this.selectedFactura.setTypeOfPayment((TipoDePagoDeFactura) this.selectorDeTipoDePago.getSelectedItem());
-            System.out.println("Updating factura: " + this.selectedFactura);
+
             this.facturaCrud.modificar(this.selectedFactura);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al modificar la factura", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         try {
@@ -479,22 +500,29 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
 
 
         } catch (Exception ex) {
-            //System.getLogger(FacturaInternalLayaut.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al cargar las facturas", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_updateFacturaButtonActionPerformed
 
     private void eliminarFacturaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarFacturaButtonActionPerformed
         if(this.selectedFactura != null){
-            try {
-                this.facturaCrud.eliminar(this.selectedFactura);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            int response = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres eliminar esta factura?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    this.facturaCrud.eliminar(this.selectedFactura);
+                } catch (Exception e) {
+                    Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(this, "Error al eliminar la factura", "Error", JOptionPane.ERROR_MESSAGE);
+                }
 
-            try {
-                this.facturaGrilla = new FacturaGrilla(this.facturaCrud.listar());
-                this.FacturasTable.setModel(this.facturaGrilla);
-            } catch (Exception ex) {
+                try {
+                    this.facturaGrilla = new FacturaGrilla(this.facturaCrud.listar());
+                    this.FacturasTable.setModel(this.facturaGrilla);
+                } catch (Exception ex) {
+                    Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Error al cargar las facturas", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_eliminarFacturaButtonActionPerformed
@@ -502,7 +530,6 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
 
     private void FacturasTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FacturasTableMouseClicked
         try {
-            System.out.println("Selected factura: " + this.selectedFactura);
 
             Integer selectedRow = this.FacturasTable.getSelectedRow();
             Factura factura = this.facturaGrilla.getFacturaByIndex(selectedRow);
@@ -513,10 +540,8 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
             this.refreshLineaFacturaTable();
 
         } catch (Exception ex) {
-            System.out.println("Error selecting factura: " + ex.getMessage());
-            System.out.println("Error selecting factura: " + ex.toString());
-
-            //System.getLogger(FacturaInternalLayaut.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al seleccionar la factura", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_FacturasTableMouseClicked
 
@@ -549,32 +574,37 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
 
     private void deleteLineaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLineaButtonActionPerformed
         if(this.selectedLineaFactura != null && this.selectedLineaFactura.getId() != null){
-            try {
-                this.lineaFacturaICrud.eliminar(this.selectedLineaFactura);
-                refreshLineaFacturaTable();
-                clearLineaFacturaSelection();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            int response = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres eliminar esta línea de factura?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    this.lineaFacturaICrud.eliminar(this.selectedLineaFactura);
+                    refreshLineaFacturaTable();
+                    clearLineaFacturaSelection();
+                } catch (Exception e) {
+                    Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(this, "Error al eliminar la linea de factura", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_deleteLineaButtonActionPerformed
 
     private void updateLineaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLineaButtonActionPerformed
         if(this.selectedLineaFactura != null){
-            try {
-                Integer nuevaCantidad = (Integer) this.cantidadProductoSpinner.getValue();
-                this.selectedLineaFactura.setCantidad(nuevaCantidad);
-                if(this.selectedLineaFactura.getId() == null){
-                    System.out.println("La linea de factura es nueva, creando...");
-                    this.lineaFacturaICrud.crear(this.selectedLineaFactura);
-                }else{
-                    System.out.println("La linea de factura ya existe, actualizando...");
-                    this.lineaFacturaICrud.modificar(this.selectedLineaFactura);
+            if(validateLineaFactura()){
+                try {
+                    Integer nuevaCantidad = (Integer) this.cantidadProductoSpinner.getValue();
+                    this.selectedLineaFactura.setCantidad(nuevaCantidad);
+                    if(this.selectedLineaFactura.getId() == null){
+                        this.lineaFacturaICrud.crear(this.selectedLineaFactura);
+                    }else{
+                        this.lineaFacturaICrud.modificar(this.selectedLineaFactura);
+                    }
+                } catch (Exception e) {
+                    Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(this, "Error al actualizar la linea de factura", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                refreshLineaFacturaTable();
             }
-            refreshLineaFacturaTable();
         }
     }//GEN-LAST:event_updateLineaButtonActionPerformed
 
@@ -645,8 +675,8 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
             productoGrilla = new ProductoGrillaOnFacturaScreen(filteredProducts);
             productoTable.setModel(productoGrilla);
         } catch (Exception e) {
-            // Handle exception, maybe show a dialog
-            e.printStackTrace();
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al filtrar los productos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -677,7 +707,8 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
             }
             this.productoTable.setModel(this.productoGrilla);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al filtrar los productos por categoria", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_categoriaFilterComboBoxActionPerformed
 
@@ -739,12 +770,10 @@ public class FacturaInternalLayaut extends javax.swing.JInternalFrame {
                             this.selectedFactura.getId()
                     ));
                 }
-                System.out.println("Lineas de Factura para la factura id " + this.selectedFactura.getId() + ": " + lineasDeFactura);
             }
         } catch (Exception e) {
-            // It's better to show an error message to the user than to crash
-            // For now, we'll keep the runtime exception as it was the previous behavior for errors.
-            throw new RuntimeException(e);
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al refrescar las lineas de factura", "Error", JOptionPane.ERROR_MESSAGE);
         }
         this.lineaGrilla = new LineaGrilla(lineasDeFactura);
         this.lineaFacturaTable.setModel(this.lineaGrilla);

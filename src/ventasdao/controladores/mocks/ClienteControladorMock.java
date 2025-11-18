@@ -14,9 +14,14 @@ public class ClienteControladorMock implements ICrud<Cliente> {
     private final List<Cliente> clientes = new ArrayList<>();
     private final TipoClienteControladorMock tipoClienteControladorMock;
 
-    public ClienteControladorMock() throws Exception {
+    public ClienteControladorMock()  {
         this.tipoClienteControladorMock = new TipoClienteControladorMock();
-        List<TipoCliente> tiposCliente = tipoClienteControladorMock.listar();
+        List<TipoCliente> tiposCliente = null;
+        try {
+            tiposCliente = tipoClienteControladorMock.listar();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         Cliente c1 = new Cliente();
         c1.setId(1);
