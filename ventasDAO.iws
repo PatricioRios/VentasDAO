@@ -1,42 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ControladorProducto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ventasdao/dominio/Conexion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Producto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventasDAO.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventasDAO.ipr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventasDAO.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/VentasDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/VentasDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/CategoriaControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/CategoriaControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/ClienteControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ClienteControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/ICrud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ICrud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/dominio/ConnectionFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/GrillaCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/GrillaCliente.java" afterDir="false" />
-    </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" show_ignored="true">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="module" />
+      <option value="repository" />
+    </option>
+  </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="ventasDAO" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -193,12 +175,20 @@
       <select />
     </treeState>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
+  <component name="ProjectId" id="3585iLybosdTBd3zMjXSCmYvWKe" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -256,27 +246,28 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../postgresql-42.2.16.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.VentasDAO">
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Principal.executor": "Run",
+    "Application.VentasDAO.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "875",
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "C:/Users/facu1/OneDrive/Escritorio/Parcial Base de Datos 2025/VentasDAO-develop/VentasDAO-develop",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.language"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Principal">
     <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ventasdao.ui.Principal" />
       <module name="ventasDAO" />
@@ -291,6 +282,8 @@
       </method>
     </configuration>
     <configuration name="VentasDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="ventasdao.VentasDAO" />
       <module name="ventasDAO" />
       <extension name="coverage">
@@ -313,9 +306,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.VentasDAO" />
         <item itemvalue="Application.Principal" />
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Application.VentasDAO" />
       </list>
     </recent_temporary>
   </component>
@@ -373,16 +365,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ventasdao/dominio/Conexion.java</url>
-          <line>36</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ventasdao/VentasDAO.java</url>
-          <line>24</line>
-          <properties />
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/src/ventasdao/controladores/mocks/LineaFacturaControladorMock.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -574,6 +559,14 @@
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
   <component name="masterDetails">
     <states>

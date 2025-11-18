@@ -34,9 +34,12 @@ public class ProductoControlador implements ICrud<Producto>{
     private ResultSet resultSet;
 
     private String query;
+
+    private String sql;
     
     private CategoriaControlador categoriaControlador;
 
+  ;
 
     @Override
     public boolean crear(Producto entidad) throws SQLException, Exception {
@@ -63,19 +66,52 @@ public class ProductoControlador implements ICrud<Producto>{
     }
 
     @Override
-    public boolean eliminar(Producto entidad) {
-        return false;
+    public boolean eliminar(Producto entidad) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        sql = "DELETE FROM productos WHERE id = ?";
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, entidad.getId());
+        int filas = ps.executeUpdate();
+        connection.close();
+        return filas > 0;
     }
 
+
     @Override
-    public Producto extraer(int id) {
+    public Producto extraer(int id) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        query = "SELECT * FROM productos WHERE id = ?";
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, id);
+        resultSet = ps.executeQuery();
+        connection.close();
+
+        if (resultSet.next()) {
+            Producto p = new Producto();
+            p.setId(id);
+            p.setDescripcion(resultSet.getString("descripcion"));
+            p.setPrecio(resultSet.getFloat("precio"));
+            return p;
+        }
+
         return null;
     }
 
+
     @Override
-    public boolean modificar(Producto entidad) {
-        return false;
+    public boolean modificar(Producto entidad) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        sql = "UPDATE productos SET descripcion = ?, precio = ?, categoria_id = ? WHERE id = ?";
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, entidad.getDescripcion());
+        ps.setDouble(2, entidad.getPrecio());
+        ps.setInt(3, entidad.getCategoria().getId());
+        ps.setInt(4, entidad.getId());
+        ps.executeUpdate();
+        connection.close();
+        return true;
     }
+
 
     @Override
     public ArrayList <Producto> listar() throws Exception {
@@ -118,6 +154,44 @@ public class ProductoControlador implements ICrud<Producto>{
      Categoria categoria = categoriaControlador.extraer(id);
      
      return categoria;
- }   
-    
+ }
+    public List<Producto> nameStartsWith(String prefix) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        query = "SELECT * FROM productos WHERE descripcion ILIKE ?";
+        ps = connection.prepareStatement(query);
+        ps.setString(1, prefix + "%");
+        resultSet = ps.executeQuery();
+        connection.close();
+
+        List<Producto> lista = new ArrayList<>();
+        while (resultSet.next()) {
+            Producto p = new Producto();
+            p.setId(resultSet.getInt("id"));
+            p.setDescripcion(resultSet.getString("descripcion"));
+            p.setPrecio(resultSet.getFloat("precio"));
+            lista.add(p);
+        }
+        return lista;
+    }
+
+    public List<Producto> filterByNameAndCategory(String prefix, Categoria categoria) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        query = "SELECT * FROM productos WHERE descripcion ILIKE ? AND categoria_id = ?";
+        ps = connection.prepareStatement(query);
+        ps.setString(1, prefix + "%");
+        ps.setInt(2, categoria.getId());
+        resultSet = ps.executeQuery();
+        connection.close();
+
+        List<Producto> lista = new ArrayList<>();
+        while (resultSet.next()) {
+            Producto p = new Producto();
+            p.setId(resultSet.getInt("id"));
+            p.setDescripcion(resultSet.getString("descripcion"));
+            p.setPrecio(resultSet.getFloat("precio"));
+            lista.add(p);
+        }
+        return lista;
+    }
+
 }

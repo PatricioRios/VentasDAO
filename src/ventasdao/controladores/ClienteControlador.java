@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.List;
 
 import ventasdao.dominio.Conexion;
 import ventasdao.objetos.Cliente;
@@ -64,8 +65,21 @@ public class ClienteControlador implements ICrud<Cliente>{
     }
 
     @Override
-    public boolean eliminar(Cliente entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean eliminar(Cliente entidad) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        this.sql = "DELETE FROM clientes WHERE id = ?";
+
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, entidad.getId());
+            int filasAfectadas = ps.executeUpdate();
+            connection.close();
+            return filasAfectadas > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
     }
 
     @Override
@@ -106,13 +120,66 @@ public class ClienteControlador implements ICrud<Cliente>{
     }
 
     @Override
-    public boolean modificar(Cliente entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean modificar(Cliente entidad) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        this.sql = "UPDATE clientes SET nombre = ?, apellido = ?, cuil = ?, fecha_nacimiento = ?, tipo_cliente_id = ? WHERE id = ?";
+
+        Date fecha = new Date(entidad.getFechaNacimiento().getTime());
+
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, entidad.getNombre());
+        ps.setString(2, entidad.getApellido());
+        ps.setString(3, entidad.getCuil());
+        ps.setDate(4, fecha);
+        ps.setInt(5, entidad.getTipoCliente().getId());
+        ps.setInt(6, entidad.getId());
+
+        ps.executeUpdate();
+        connection.close();
+        return true;
     }
 
     @Override
-    public Cliente extraer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente extraer(int id) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        sql = "SELECT * FROM clientes WHERE id = ?";
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        this.rs = ps.executeQuery();
+        connection.close();
+
+        if (rs.next()) {
+            Cliente cliente = new Cliente();
+            cliente.setId(id);
+            cliente.setNombre(rs.getString("nombre"));
+            cliente.setApellido(rs.getString("apellido"));
+            cliente.setCuil(rs.getString("cuil"));
+            cliente.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+            return cliente;
+        }
+
+        return null;
+    }
+    public List<Cliente> listarPorApellido(String prefijo) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        sql = "SELECT * FROM clientes WHERE apellido ILIKE ?";
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, prefijo + "%");
+        rs = ps.executeQuery();
+        connection.close();
+
+        List<Cliente> lista = new ArrayList<>();
+        while (rs.next()) {
+            Cliente c = new Cliente();
+            c.setId(rs.getInt("id"));
+            c.setNombre(rs.getString("nombre"));
+            c.setApellido(rs.getString("apellido"));
+            c.setCuil(rs.getString("cuil"));
+            c.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+            lista.add(c);
+        }
+
+        return lista;
     }
 
     

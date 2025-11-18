@@ -33,22 +33,55 @@ public class TipoClienteControlador implements ICrud<TipoCliente>{
 
     @Override
     public boolean crear(TipoCliente entidad) throws SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        connection = Conexion.obtenerConexion();
+        sql = "INSERT INTO tipo_cliente (nombre, descripcion) VALUES (?, ?)";
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, entidad.getNombre());
+        ps.setString(2, entidad.getDescripcion());
+        ps.executeUpdate();
+        connection.close();
+        return true;
     }
-
     @Override
     public boolean eliminar(TipoCliente entidad) throws SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        connection = Conexion.obtenerConexion();
+        sql = "DELETE FROM tipo_cliente WHERE id = ?";
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, entidad.getId());
+        int filas = ps.executeUpdate();
+        connection.close();
+        return filas > 0;
     }
 
     @Override
     public TipoCliente extraer(int id) throws SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        connection = Conexion.obtenerConexion();
+        sql = "SELECT * FROM tipo_cliente WHERE id = ?";
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        rs = ps.executeQuery();
+        connection.close();
 
+        if (rs.next()) {
+            return new TipoCliente(
+                    rs.getInt("id"),
+                    rs.getString("nombre"),
+                    rs.getString("descripcion")
+            );
+        }
+        return null;
+    }
     @Override
     public boolean modificar(TipoCliente entidad) throws SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        connection = Conexion.obtenerConexion();
+        sql = "UPDATE tipo_cliente SET nombre = ?, descripcion = ? WHERE id = ?";
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, entidad.getNombre());
+        ps.setString(2, entidad.getDescripcion());
+        ps.setInt(3, entidad.getId());
+        ps.executeUpdate();
+        connection.close();
+        return true;
     }
 
       @Override

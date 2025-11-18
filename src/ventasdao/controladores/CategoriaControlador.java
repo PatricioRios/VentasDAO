@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.List;
 
 import ventasdao.dominio.Conexion;
 import ventasdao.objetos.Categoria;
@@ -94,8 +95,21 @@ public class CategoriaControlador implements ICrud<Categoria>{
     }
 
     @Override
-    public boolean eliminar(Categoria entidad) throws SQLException, Exception{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean eliminar(Categoria entidad) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        this.sql = "DELETE FROM categorias WHERE id = ?";
+
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, entidad.getId());
+            int filasAfectadas = ps.executeUpdate();
+            connection.close();
+            return filasAfectadas > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
     }
 
     @Override
@@ -133,5 +147,25 @@ public class CategoriaControlador implements ICrud<Categoria>{
        connection.close();
        return true;
     }
-    
+    public List<Categoria> listarPorDenominacion(String prefijo) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        sql = "SELECT * FROM categorias WHERE denominacion ILIKE ?";
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, prefijo + "%");
+        rs = ps.executeQuery();
+        connection.close();
+
+        List<Categoria> lista = new ArrayList<>();
+        while (rs.next()) {
+            Categoria c = new Categoria();
+            c.setId(rs.getInt("id"));
+            c.setDenominacion(rs.getString("denominacion"));
+            c.setDescripcion(rs.getString("descripcion"));
+            lista.add(c);
+        }
+
+        return lista;
+    }
+
+
 }

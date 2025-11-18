@@ -1,20 +1,31 @@
 # VentasDAO
 
-Proyecto que contiene el Alta de Categoria y Clientes con JDBC
+Repositorio en donde estamos desarrollando.
 
 
 ### Installing 🔩
 Ejecutar scripts de la en la base de datos
 
+Utilizar el siguiente comando para iniciar todo.(con "-d" al final para que se ejecute en segundo plano.)
 ```
-script01.sql
+docker compose up
+```
+Para apagar los servicios:
+```
+docker compose stop
+```
+Para iniciar los servicios luego de haberlos apagado con el comando anterior:
+```
+docker compose start
+```
+Para bajar ("-v" para borrar los servicios de tu maquina junto a los volumentes (datos))
+```
+docker compose down -v
 ```
 
-```
-script02.sql
-```
-contienen los scripts de la base de datos
+## Credenciales de la base de datos
+usuario: postgres
 
-### Settings ⌨️
+contraseña: admin
 
-Configurar los atributos de Conexion de la Clase  ConnectionFactory y ademas agregar el jar de postgres a la libreria
+puerto: 5432

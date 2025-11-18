@@ -72,6 +72,8 @@ public class AbmCliente extends javax.swing.JInternalFrame {
         jtListaClientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
+
         jcbTipoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setText("Apellido");

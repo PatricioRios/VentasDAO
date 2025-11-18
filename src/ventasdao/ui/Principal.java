@@ -5,12 +5,21 @@
  */
 package ventasdao.ui;
 
+import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ventasdao.controladores.ICrud;
+import ventasdao.controladores.mocks.CategoriaControladorMock;
+import ventasdao.controladores.mocks.FacturaControladorMock;
+import ventasdao.controladores.mocks.LineaFacturaControladorMock;
+import ventasdao.controladores.mocks.ProductoControladorMock;
+import ventasdao.objetos.Categoria;
+import ventasdao.objetos.Factura;
 import ventasdao.ui.abm.AbmCategoria;
 import ventasdao.ui.abm.AbmCliente;
 import ventasdao.ui.abm.AbmCliente;
 import ventasdao.ui.abm.AbmProducto;
+import ventasdao.ui.abm.FacturaInternalLayaut;
 
 /**
  *
@@ -21,8 +30,33 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    
+    public enum Pantallas{
+        PRODUCTO,
+        FACTURAS,
+        CLIENTE,
+        TIPO_CLIENTE,
+        CATEGORIA
+    }
+    
+    private ICrud<Factura> facturaCrud;
+    private LineaFacturaControladorMock lineaFacturaControlador;
+    private ProductoControladorMock productoControladorMock;
+
+    private ICrud<Categoria> categoriaCrud;
     public Principal() {
+        this.lineaFacturaControlador = new LineaFacturaControladorMock();
+        this.facturaCrud = new FacturaControladorMock();
+        this.categoriaCrud = new CategoriaControladorMock();
+        try {
+            this.productoControladorMock = new ProductoControladorMock();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         initComponents();
+
+        
     }
 
     /**
@@ -34,58 +68,104 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jdpContenedorPrincipal = new javax.swing.JDesktopPane();
+        MainContainer = new javax.swing.JDesktopPane();
+        jPanel2 = new javax.swing.JPanel();
+        NavCategoriasButton = new javax.swing.JButton();
+        NavProductosButton = new javax.swing.JButton();
+        NavClientesButton = new javax.swing.JButton();
+        NavTipoClienteButon = new javax.swing.JButton();
+        NavFacturas = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jmiCategoria = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jmiProducto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jdpContenedorPrincipalLayout = new javax.swing.GroupLayout(jdpContenedorPrincipal);
-        jdpContenedorPrincipal.setLayout(jdpContenedorPrincipalLayout);
-        jdpContenedorPrincipalLayout.setHorizontalGroup(
-            jdpContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+        NavCategoriasButton.setText("Categorias");
+        NavCategoriasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NavCategoriasButtonActionPerformed(evt);
+            }
+        });
+
+        NavProductosButton.setText("Productos");
+        NavProductosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NavProductosButtonActionPerformed(evt);
+            }
+        });
+
+        NavClientesButton.setText("Clientes");
+        NavClientesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NavClientesButtonActionPerformed(evt);
+            }
+        });
+
+        NavTipoClienteButon.setText("Tipo Cliente");
+        NavTipoClienteButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NavTipoClienteButonActionPerformed(evt);
+            }
+        });
+
+        NavFacturas.setText("Facturas");
+        NavFacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NavFacturasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(NavCategoriasButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NavProductosButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NavClientesButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NavTipoClienteButon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NavFacturas)
+                .addGap(0, 744, Short.MAX_VALUE))
         );
-        jdpContenedorPrincipalLayout.setVerticalGroup(
-            jdpContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 442, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NavProductosButton)
+                    .addComponent(NavCategoriasButton)
+                    .addComponent(NavClientesButton)
+                    .addComponent(NavTipoClienteButon)
+                    .addComponent(NavFacturas))
+                .addContainerGap())
         );
 
-        jMenu1.setText("File");
+        jPanel1.setLayout(new java.awt.CardLayout());
 
-        jmiCategoria.setText("Categoria");
-        jmiCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiCategoriaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmiCategoria);
+        MainContainer.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        MainContainer.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jMenuItem1.setText("Cliente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jmiProducto.setText("Producto");
-        jmiProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jmiProductoMouseClicked(evt);
-            }
-        });
-        jmiProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiProductoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmiProducto);
-
-        jMenuBar1.add(jMenu1);
+        javax.swing.GroupLayout MainContainerLayout = new javax.swing.GroupLayout(MainContainer);
+        MainContainer.setLayout(MainContainerLayout);
+        MainContainerLayout.setHorizontalGroup(
+            MainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(MainContainerLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        MainContainerLayout.setVerticalGroup(
+            MainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainContainerLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(625, 625, 625)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setJMenuBar(jMenuBar1);
 
@@ -93,55 +173,65 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jdpContenedorPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(MainContainer)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jdpContenedorPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(MainContainer)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmiCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCategoriaActionPerformed
-        // TODO add your handling code here:
-        
-        AbmCategoria abmCategoria = new AbmCategoria();
-        jdpContenedorPrincipal.add(abmCategoria);
-        abmCategoria.setVisible(true);
-    }//GEN-LAST:event_jmiCategoriaActionPerformed
+    private void NavFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavFacturasActionPerformed
+        FacturaInternalLayaut facturaScreen = new FacturaInternalLayaut(
+                this.facturaCrud,
+                this.lineaFacturaControlador,
+                this.productoControladorMock,
+                this.categoriaCrud
+        );
+        MainContainer.add(facturaScreen);
+        facturaScreen.setPreferredSize(
+                new Dimension(
+                        this.MainContainer.getWidth(),
+                        this.MainContainer.getHeight()-50
+                )
+        );
+        facturaScreen.setLocation(
+                (MainContainer.getWidth() - facturaScreen.getWidth()) / 2,50);
+        facturaScreen.setVisible(true);
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+    }//GEN-LAST:event_NavFacturasActionPerformed
+
+    private void NavTipoClienteButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavTipoClienteButonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NavTipoClienteButonActionPerformed
+
+    private void NavClientesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavClientesButtonActionPerformed
         // TODO add your handling code here:
         AbmCliente abmCliente;
         try {
             abmCliente = new AbmCliente();
-            jdpContenedorPrincipal.add(abmCliente);
+            MainContainer.add(abmCliente);
             abmCliente.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
-        
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_NavClientesButtonActionPerformed
 
-    private void jmiProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiProductoActionPerformed
-        // TODO add your handling code here:
+    private void NavProductosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavProductosButtonActionPerformed
         AbmProducto abmProducto = new AbmProducto();
-        jdpContenedorPrincipal.add(abmProducto);
+        MainContainer.add(abmProducto);
         abmProducto.setVisible(true);
-      
-    }//GEN-LAST:event_jmiProductoActionPerformed
+    }//GEN-LAST:event_NavProductosButtonActionPerformed
 
-    private void jmiProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiProductoMouseClicked
-      
-    }//GEN-LAST:event_jmiProductoMouseClicked
+    private void NavCategoriasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NavCategoriasButtonActionPerformed
+        // TODO add your handling code here:
+        AbmCategoria abmCategoria = new AbmCategoria();
+        MainContainer.add(abmCategoria);
+        abmCategoria.setVisible(true);
+    }//GEN-LAST:event_NavCategoriasButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +240,7 @@ public class Principal extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -179,11 +269,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JDesktopPane MainContainer;
+    private javax.swing.JButton NavCategoriasButton;
+    private javax.swing.JButton NavClientesButton;
+    private javax.swing.JButton NavFacturas;
+    private javax.swing.JButton NavProductosButton;
+    private javax.swing.JButton NavTipoClienteButon;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JDesktopPane jdpContenedorPrincipal;
-    private javax.swing.JMenuItem jmiCategoria;
-    private javax.swing.JMenuItem jmiProducto;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
