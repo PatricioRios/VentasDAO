@@ -90,7 +90,7 @@ public class ClienteControlador implements ICrud<Cliente>{
                 cliente.setId(rs.getInt("id"));
                 cliente.setApellido (rs.getString("apellido"));
                 cliente.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
-                        //System.out.println(cliente);
+
 
                 clientes.add(cliente);
                 

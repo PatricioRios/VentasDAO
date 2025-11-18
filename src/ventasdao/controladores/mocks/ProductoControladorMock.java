@@ -137,8 +137,7 @@ public class ProductoControladorMock implements ICrud<Producto> {
     public List<Producto> nameStartsWith(String prefix) throws SQLException, Exception {
         List<Producto> productosFiltrados = new ArrayList<>();
         for (Producto producto : productos) {
-            System.out.println("Checking product: " + producto.getNombre() + " against prefix: " + prefix);
-            if (producto.getNombre().toLowerCase().startsWith(prefix.toLowerCase())) {
+                        if (producto.getNombre().toLowerCase().startsWith(prefix.toLowerCase())) {
                 productosFiltrados.add(producto);
             }
         }

@@ -4,15 +4,19 @@
  */
 package ventasdao.ui.abm;
 
+import javax.swing.JOptionPane;
 import ventasdao.controladores.ICrud;
 import ventasdao.objetos.TipoCliente;
 import ventasdao.ui.grilla.TipoClienteGrilla;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author brenda
  */
-public class ClienteTipoAbm extends javax.swing.JInternalFrame {
+public class AbmTipoCliente extends javax.swing.JInternalFrame {
 
 
     private ICrud<TipoCliente> tipoClienteControlador;
@@ -21,7 +25,7 @@ public class ClienteTipoAbm extends javax.swing.JInternalFrame {
     /**
      * Creates new form ClienteTipoAbm
      */
-    public ClienteTipoAbm(
+    public AbmTipoCliente(
         ICrud<TipoCliente> tipoClienteControlador
     ){
         this.tipoClienteControlador = tipoClienteControlador;
@@ -31,8 +35,17 @@ public class ClienteTipoAbm extends javax.swing.JInternalFrame {
             this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
             tipoClienteTable.setModel(tipoClienteGrilla);
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(AbmTipoCliente.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al cargar los tipos de cliente", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private boolean validateFields(){
+        if(nombreTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "El campo nombre no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
 
@@ -117,18 +130,17 @@ public class ClienteTipoAbm extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectedClientTipeIdText)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(actualizarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(crearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(eliminarButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(actualizarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(crearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(eliminarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(nombreTextField))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -184,42 +196,52 @@ public class ClienteTipoAbm extends javax.swing.JInternalFrame {
     }
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
-        TipoCliente nuevoTipoCliente = new TipoCliente();
-        nuevoTipoCliente.setNombre(this.nombreTextField.getText());
-        nuevoTipoCliente.setDescripcion(this.descripcionTextArea.getText());
-        try {
-            this.tipoClienteControlador.crear(nuevoTipoCliente);
-            this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
-            tipoClienteTable.setModel(tipoClienteGrilla);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(validateFields()){
+            TipoCliente nuevoTipoCliente = new TipoCliente();
+            nuevoTipoCliente.setNombre(this.nombreTextField.getText());
+            nuevoTipoCliente.setDescripcion(this.descripcionTextArea.getText());
+            try {
+                this.tipoClienteControlador.crear(nuevoTipoCliente);
+                this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
+                tipoClienteTable.setModel(tipoClienteGrilla);
+            } catch (Exception e) {
+                Logger.getLogger(AbmTipoCliente.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(this, "Error al crear el tipo de cliente", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_crearButtonActionPerformed
 
     private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
         if (this.selectedTipoCliente != null) {
-            this.selectedTipoCliente.setNombre(this.nombreTextField.getText());
-            this.selectedTipoCliente.setDescripcion(this.descripcionTextArea.getText());
-            try {
-                this.tipoClienteControlador.modificar(this.selectedTipoCliente);
-                this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
-                tipoClienteTable.setModel(tipoClienteGrilla);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(validateFields()){
+                this.selectedTipoCliente.setNombre(this.nombreTextField.getText());
+                this.selectedTipoCliente.setDescripcion(this.descripcionTextArea.getText());
+                try {
+                    this.tipoClienteControlador.modificar(this.selectedTipoCliente);
+                    this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
+                    tipoClienteTable.setModel(tipoClienteGrilla);
+                } catch (Exception e) {
+                    Logger.getLogger(AbmTipoCliente.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(this, "Error al modificar el tipo de cliente", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_actualizarButtonActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
         if (this.selectedTipoCliente != null) {
-            try {
-                this.tipoClienteControlador.eliminar(this.selectedTipoCliente);
-                this.selectedTipoCliente = null;
-                refreshClienteTipoDetails();
-                this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
-                tipoClienteTable.setModel(tipoClienteGrilla);
-            } catch (Exception e) {
-                e.printStackTrace();
+            int response = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres eliminar este tipo de cliente?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    this.tipoClienteControlador.eliminar(this.selectedTipoCliente);
+                    this.selectedTipoCliente = null;
+                    refreshClienteTipoDetails();
+                    this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
+                    tipoClienteTable.setModel(tipoClienteGrilla);
+                } catch (Exception e) {
+                    Logger.getLogger(AbmTipoCliente.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(this, "Error al eliminar el tipo de cliente", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_eliminarButtonActionPerformed

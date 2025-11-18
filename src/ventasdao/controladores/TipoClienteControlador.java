@@ -75,7 +75,7 @@ public class TipoClienteControlador implements ICrud<TipoCliente>{
                 tipoClientes.add(tipoCliente);
                 
             }
-            //System.out.println(cont);
+    
             return tipoClientes;
         } catch(SQLException ex){
             ex.printStackTrace();
