@@ -319,7 +319,8 @@ CREATE TABLE public.clientes (
     id integer NOT NULL,
     nombre character varying(60) NOT NULL,
     cuil character varying(12) NOT NULL,
-    razon_social character varying(60),
+    apellido character varying(60),
+    fecha_nacimiento date,
     tipo_cliente_id integer NOT NULL
 );
 
@@ -356,7 +357,7 @@ CREATE TABLE public.factura (
     id integer NOT NULL,
     date date NOT NULL,
     cliente_id integer NOT NULL,
-    forma_de_pago public.forma_de_pago NOT NULL
+    tipo_pago character varying(60) NOT NULL
 );
 
 
