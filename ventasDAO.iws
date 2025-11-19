@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4cf5be9-4d47-466a-8691-f303a3f8eead" name="Default Changelist" comment="se hizo refactor de la clase conexion, los formularios del paquete UI deben ser corregidos">
-      <change beforePath="$PROJECT_DIR$/db-config/db-config.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db-config/db-config.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/ClienteControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ClienteControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/FacturaControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/FacturaControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/LineaFacturaControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/LineaFacturaControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/ProductoControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/ProductoControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/controladores/TipoClienteControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/controladores/TipoClienteControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/objetos/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/objetos/Factura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCategoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmCliente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmFactura.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmFactura.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmFactura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmFactura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/abm/AbmProducto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ventasdao/ui/grilla/FacturaGrilla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ventasdao/ui/grilla/FacturaGrilla.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ventasDAO.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ventasDAO.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

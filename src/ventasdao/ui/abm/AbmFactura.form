@@ -48,15 +48,16 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cantidadProductoSpinner" alignment="0" max="32767" attributes="0"/>
+                          <Component id="clienteComboBox" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="productNameText" min="-2" max="-2" attributes="0"/>
                                   <Component id="productPriceText" min="-2" max="-2" attributes="0"/>
                                   <Component id="productIdText" min="-2" max="-2" attributes="0"/>
+                                  <Component id="precioTotalLabel" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="clienteComboBox" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -157,8 +158,10 @@
                               <Component id="productPriceText" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="productIdText" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="clienteComboBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="precioTotalLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -495,6 +498,11 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="precioTotalLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Precio Total:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

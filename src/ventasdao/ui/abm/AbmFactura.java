@@ -151,6 +151,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         cantidadText2 = new javax.swing.JLabel();
         cancelarEditButton = new javax.swing.JButton();
         clienteComboBox = new javax.swing.JComboBox<>();
+        precioTotalLabel = new javax.swing.JLabel();
 
         setClosable(true);
         setForeground(java.awt.Color.gray);
@@ -363,6 +364,8 @@ public class AbmFactura extends javax.swing.JInternalFrame {
             }
         });
 
+        precioTotalLabel.setText("Precio Total:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -385,13 +388,14 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cantidadProductoSpinner)
+                            .addComponent(clienteComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(productNameText)
                                     .addComponent(productPriceText)
-                                    .addComponent(productIdText))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(clienteComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(productIdText)
+                                    .addComponent(precioTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cantidadText)
@@ -471,8 +475,10 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                                 .addComponent(productPriceText)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(productIdText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clienteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(clienteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(precioTotalLabel)))))
                 .addGap(237, 237, 237))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -785,10 +791,17 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     }
     public void refreshLineaFacturaTable(){
         List<LineaFactura> lineasDeFactura = new ArrayList<>();
+        float total = 0.0f;
         try {
             if (this.selectedFactura != null) {
                 // Create a copy of the list to avoid modifying the original list from the mock controller
                 lineasDeFactura = new ArrayList<>(this.lineaFacturaICrud.listarPorFacturaId(this.selectedFactura.getId()));
+
+                for (LineaFactura linea : lineasDeFactura) {
+                    if(linea.getProducto() != null){
+                        total += linea.getCantidad() * linea.getProducto().getPrecio();
+                    }
+                }
 
                 if(lineasDeFactura.isEmpty() || lineasDeFactura.get(lineasDeFactura.size()-1).getId() != null){
                     lineasDeFactura.add(new LineaFactura(
@@ -814,6 +827,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         lineaFacturaTable.getColumnModel().getColumn(0).setResizable(false);
         lineaFacturaTable.getColumnModel().getColumn(0).setPreferredWidth(15);
         lineaFacturaTable.getColumnModel().getColumn(5).setResizable(false);
+        precioTotalLabel.setText("Total: " + total);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateFacturaButton;
@@ -833,6 +847,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lineaFacturaIdText;
     private javax.swing.JTable lineaFacturaTable;
+    private javax.swing.JLabel precioTotalLabel;
     private javax.swing.JLabel productIdText;
     private javax.swing.JTextField productNameFilterTextField;
     private javax.swing.JLabel productNameText;
