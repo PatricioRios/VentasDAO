@@ -84,16 +84,20 @@ public class ProductoControlador implements ICrud<Producto>{
         ps = connection.prepareStatement(query);
         ps.setInt(1, id);
         resultSet = ps.executeQuery();
-        connection.close();
+        CategoriaControlador categoriaControlador = new CategoriaControlador();
 
         if (resultSet.next()) {
             Producto p = new Producto();
             p.setId(id);
+            p.setNombre(resultSet.getString("nombre"));
             p.setDescripcion(resultSet.getString("descripcion"));
             p.setPrecio(resultSet.getFloat("precio"));
+            p.setFechaCreacion(resultSet.getDate("fecha_creacion"));
+            p.setCategoria(categoriaControlador.extraer(resultSet.getInt("categoria_id")));
+            connection.close();
             return p;
         }
-
+        connection.close();
         return null;
     }
 
@@ -101,12 +105,13 @@ public class ProductoControlador implements ICrud<Producto>{
     @Override
     public boolean modificar(Producto entidad) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "UPDATE productos SET descripcion = ?, precio = ?, categoria_id = ? WHERE id = ?";
+        sql = "UPDATE productos SET nombre = ?, descripcion = ?, precio = ?, categoria_id = ? WHERE id = ?";
         ps = connection.prepareStatement(sql);
-        ps.setString(1, entidad.getDescripcion());
-        ps.setDouble(2, entidad.getPrecio());
-        ps.setInt(3, entidad.getCategoria().getId());
-        ps.setInt(4, entidad.getId());
+        ps.setString(1, entidad.getNombre());
+        ps.setString(2, entidad.getDescripcion());
+        ps.setDouble(3, entidad.getPrecio());
+        ps.setInt(4, entidad.getCategoria().getId());
+        ps.setInt(5, entidad.getId());
         ps.executeUpdate();
         connection.close();
         return true;
@@ -189,6 +194,28 @@ public class ProductoControlador implements ICrud<Producto>{
             p.setId(resultSet.getInt("id"));
             p.setDescripcion(resultSet.getString("descripcion"));
             p.setPrecio(resultSet.getFloat("precio"));
+            lista.add(p);
+        }
+        return lista;
+    }
+
+    public List<Producto> listarPorCategoria(Categoria categoria) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        query = "SELECT * FROM productos WHERE categoria_id = ?";
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, categoria.getId());
+        resultSet = ps.executeQuery();
+        connection.close();
+
+        List<Producto> lista = new ArrayList<>();
+        while (resultSet.next()) {
+            Producto p = new Producto();
+            p.setId(resultSet.getInt("id"));
+            p.setDescripcion(resultSet.getString("descripcion"));
+            p.setPrecio(resultSet.getFloat("precio"));
+            p.setNombre(resultSet.getString("nombre"));
+            p.setFechaCreacion(resultSet.getDate("fecha_creacion"));
+            p.setCategoria(categoria);
             lista.add(p);
         }
         return lista;

@@ -56,6 +56,7 @@ public class ClienteControlador implements ICrud<Cliente>{
             ps.setInt(5, entidad.getTipoCliente().getId());
             ps.executeUpdate();
             connection.close();
+            return true;
 
 
         } catch (SQLException ex) {
@@ -86,12 +87,13 @@ public class ClienteControlador implements ICrud<Cliente>{
     public ArrayList<Cliente> listar() throws SQLException,Exception{
 
         connection = Conexion.obtenerConexion ();
+        TipoClienteControlador tipoClienteControlador = new TipoClienteControlador();
         try{
 
             this.stmt = connection.createStatement();
             this.sql = "SELECT * FROM clientes";
             this.rs   = stmt.executeQuery(sql);
-            connection.close();
+            
 
             ArrayList<Cliente> clientes = new ArrayList();
 
@@ -104,12 +106,14 @@ public class ClienteControlador implements ICrud<Cliente>{
                 cliente.setId(rs.getInt("id"));
                 cliente.setApellido (rs.getString("apellido"));
                 cliente.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+                cliente.setTipoCliente(tipoClienteControlador.extraer(rs.getInt("tipo_cliente_id")));
                 //System.out.println(cliente);
 
                 clientes.add(cliente);
 
             }
             //System.out.println(cont);
+            connection.close();
             return clientes;
         } catch(SQLException ex){
             ex.printStackTrace();
@@ -146,7 +150,7 @@ public class ClienteControlador implements ICrud<Cliente>{
         ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         this.rs = ps.executeQuery();
-        connection.close();
+        TipoClienteControlador tipoClienteControlador = new TipoClienteControlador();
 
         if (rs.next()) {
             Cliente cliente = new Cliente();
@@ -155,9 +159,11 @@ public class ClienteControlador implements ICrud<Cliente>{
             cliente.setApellido(rs.getString("apellido"));
             cliente.setCuil(rs.getString("cuil"));
             cliente.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+            cliente.setTipoCliente(tipoClienteControlador.extraer(rs.getInt("tipo_cliente_id")));
+            connection.close();
             return cliente;
         }
-
+        connection.close();
         return null;
     }
     public List<Cliente> listarPorApellido(String prefijo) throws SQLException, Exception {

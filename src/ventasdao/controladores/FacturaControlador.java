@@ -39,10 +39,11 @@ public class FacturaControlador implements ICrud<Factura>{
     @Override
     public boolean crear(Factura entidad) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "INSERT INTO facturas (date, tipo_pago) VALUES (?, ?)";
+        sql = "INSERT INTO factura (date, cliente_id, tipo_pago) VALUES (?, ?, ?)";
         ps = connection.prepareStatement(sql);
         ps.setDate(1, new java.sql.Date(entidad.getDate().getTime()));
-        ps.setString(2, entidad.getTypeOfPayment().name());
+        ps.setInt(2, entidad.getCliente().getId());
+        ps.setString(3, entidad.getTypeOfPayment().name());
         ps.executeUpdate();
         connection.close();
         return true;
@@ -53,7 +54,7 @@ public class FacturaControlador implements ICrud<Factura>{
     @Override
     public boolean eliminar(Factura entidad) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "DELETE FROM facturas WHERE id = ?";
+        sql = "DELETE FROM factura WHERE id = ?";
         ps = connection.prepareStatement(sql);
         ps.setInt(1, entidad.getId());
         int filas = ps.executeUpdate();
@@ -67,22 +68,24 @@ public class FacturaControlador implements ICrud<Factura>{
     @Override
     public Factura extraer(int id) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "SELECT * FROM facturas WHERE id = ?";
+        sql = "SELECT * FROM factura WHERE id = ?";
         ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         rs = ps.executeQuery();
-        connection.close();
+        ClienteControlador clienteControlador = new ClienteControlador();
 
         if (rs.next()) {
             Factura f = new Factura(
                     id,
                     rs.getDate("date"),
                     null,
-                    TipoDePagoDeFactura.valueOf(rs.getString("tipo_pago"))
+                    TipoDePagoDeFactura.valueOf(rs.getString("tipo_pago")),
+                    clienteControlador.extraer(rs.getInt("cliente_id"))
             );
+            connection.close();
             return f;
         }
-
+        connection.close();
         return null;
     }
 
@@ -92,11 +95,12 @@ public class FacturaControlador implements ICrud<Factura>{
     @Override
     public boolean modificar(Factura entidad) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "UPDATE facturas SET date = ?, tipo_pago = ? WHERE id = ?";
+        sql = "UPDATE factura SET date = ?, cliente_id = ?, tipo_pago = ? WHERE id = ?";
         ps = connection.prepareStatement(sql);
         ps.setDate(1, new java.sql.Date(entidad.getDate().getTime()));
-        ps.setString(2, entidad.getTypeOfPayment().name());
-        ps.setInt(3, entidad.getId());
+        ps.setInt(2, entidad.getCliente().getId());
+        ps.setString(3, entidad.getTypeOfPayment().name());
+        ps.setInt(4, entidad.getId());
         ps.executeUpdate();
         connection.close();
         return true;
@@ -106,22 +110,22 @@ public class FacturaControlador implements ICrud<Factura>{
     @Override
     public List<Factura> listar() throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "SELECT * FROM facturas";
+        sql = "SELECT * FROM factura";
         ps = connection.prepareStatement(sql);
         rs = ps.executeQuery();
-        connection.close();
-
+        ClienteControlador clienteControlador = new ClienteControlador();
         List<Factura> lista = new ArrayList<>();
         while (rs.next()) {
             Factura f = new Factura(
                     rs.getInt("id"),
                     rs.getDate("date"),
                     null,
-                    TipoDePagoDeFactura.valueOf(rs.getString("tipo_pago"))
+                    TipoDePagoDeFactura.valueOf(rs.getString("tipo_pago")),
+                    clienteControlador.extraer(rs.getInt("cliente_id"))
             );
             lista.add(f);
         }
-
+        connection.close();
         return lista;
     }
 

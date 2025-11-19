@@ -18,7 +18,7 @@ public class LineaFacturaControlador implements ICrud<LineaFactura> {
     @Override
     public boolean crear(LineaFactura entidad) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "INSERT INTO lineas_factura (cantidad, producto_id, factura_id) VALUES (?, ?, ?)";
+        sql = "INSERT INTO linea_factura (cantidad, producto_id, factura_id) VALUES (?, ?, ?)";
         ps = connection.prepareStatement(sql);
         ps.setInt(1, entidad.getCantidad());
         ps.setInt(2, entidad.getProducto().getId());
@@ -31,7 +31,7 @@ public class LineaFacturaControlador implements ICrud<LineaFactura> {
     @Override
     public boolean eliminar(LineaFactura entidad) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "DELETE FROM lineas_factura WHERE id = ?";
+        sql = "DELETE FROM linea_factura WHERE id = ?";
         ps = connection.prepareStatement(sql);
         ps.setInt(1, entidad.getId());
         int filas = ps.executeUpdate();
@@ -42,7 +42,7 @@ public class LineaFacturaControlador implements ICrud<LineaFactura> {
     @Override
     public LineaFactura extraer(int id) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "SELECT * FROM lineas_factura WHERE id = ?";
+        sql = "SELECT * FROM linea_factura WHERE id = ?";
         ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         rs = ps.executeQuery();
@@ -68,7 +68,7 @@ public class LineaFacturaControlador implements ICrud<LineaFactura> {
     @Override
     public boolean modificar(LineaFactura entidad) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "UPDATE lineas_factura SET cantidad = ?, producto_id = ?, factura_id = ? WHERE id = ?";
+        sql = "UPDATE linea_factura SET cantidad = ?, producto_id = ?, factura_id = ? WHERE id = ?";
         ps = connection.prepareStatement(sql);
         ps.setInt(1, entidad.getCantidad());
         ps.setInt(2, entidad.getProducto().getId());
@@ -82,7 +82,7 @@ public class LineaFacturaControlador implements ICrud<LineaFactura> {
     @Override
     public List<LineaFactura> listar() throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "SELECT * FROM lineas_factura";
+        sql = "SELECT * FROM linea_factura";
         ps = connection.prepareStatement(sql);
         rs = ps.executeQuery();
 
@@ -108,7 +108,7 @@ public class LineaFacturaControlador implements ICrud<LineaFactura> {
 
     public List<LineaFactura> listarPorFacturaId(int facturaId) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
-        sql = "SELECT * FROM lineas_factura WHERE factura_id = ?";
+        sql = "SELECT * FROM linea_factura WHERE factura_id = ?";
         ps = connection.prepareStatement(sql);
         ps.setInt(1, facturaId);
         rs = ps.executeQuery();

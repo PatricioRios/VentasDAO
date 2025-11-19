@@ -13,8 +13,7 @@ import javax.swing.JOptionPane;
 import ventasdao.controladores.ClienteControlador;
 import ventasdao.controladores.ICrud;
 import ventasdao.controladores.TipoClienteControlador;
-import ventasdao.controladores.mocks.ClienteControladorMock;
-import ventasdao.controladores.mocks.TipoClienteControladorMock;
+
 import ventasdao.objetos.Cliente;
 import ventasdao.objetos.TipoCliente;
 import ventasdao.ui.grilla.GrillaCliente;

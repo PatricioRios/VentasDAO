@@ -16,7 +16,7 @@ public class FacturaGrilla extends AbstractTableModel {
     
     private List<Factura> facturas;
     
-    public static int COLUMNS = 3;
+    public static int COLUMNS = 4;
 
 
     public FacturaGrilla(List<Factura> facturas) {
@@ -41,6 +41,7 @@ public class FacturaGrilla extends AbstractTableModel {
               case 0: return c.getId();
               case 1: return c.getDate();
               case 2: return c.getTypeOfPayment();
+              case 3: return c.getCliente().getNombre() + " " + c.getCliente().getApellido();
               default: return "";
           }
     }
@@ -52,6 +53,7 @@ public class FacturaGrilla extends AbstractTableModel {
             case 0: return "ID";
             case 1: return "Fecha";
             case 2: return "Tipo de Pago";
+            case 3: return "Cliente";
             default: return "";
         }
     }

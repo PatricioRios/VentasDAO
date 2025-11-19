@@ -13,8 +13,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 import ventasdao.controladores.ICrud;
-import ventasdao.controladores.mocks.LineaFacturaControladorMock;
-import ventasdao.controladores.mocks.ProductoControladorMock;
+import ventasdao.controladores.LineaFacturaControlador;
+import ventasdao.controladores.ProductoControlador;
 import ventasdao.objetos.*;
 import ventasdao.ui.grilla.FacturaGrilla;
 import ventasdao.ui.grilla.LineaGrilla;
@@ -31,24 +31,29 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private DefaultComboBoxModel categoriaFilterComboBoxModel;
     private ArrayList<TipoDePagoDeFactura> tiposDePago = new ArrayList<>();
     private ICrud<Factura> facturaCrud;
-    private LineaFacturaControladorMock lineaFacturaICrud;
+    private LineaFacturaControlador lineaFacturaICrud;
     private LineaGrilla lineaGrilla;
     private Factura selectedFactura;
     private LineaFactura selectedLineaFactura;
-    private ProductoControladorMock productoICrud;
+    private ProductoControlador productoICrud;
     private ProductoGrillaOnFacturaScreen productoGrilla;
 
+    private Cliente clienteSeleccionado;
+
     private ICrud<Categoria> categoriaCrud;
+    private ICrud<Cliente> clienteControlador;
     public AbmFactura(
             ICrud<Factura> facturaCrud,
-            LineaFacturaControladorMock lineaFacturaCrud,
-            ProductoControladorMock productoICrud,
-            ICrud<Categoria> categoriaCrud
+            LineaFacturaControlador lineaFacturaCrud,
+            ProductoControlador productoICrud,
+            ICrud<Categoria> categoriaCrud,
+            ICrud<Cliente> clienteControlador
             ) {
         this.facturaCrud = facturaCrud;
         this.lineaFacturaICrud = lineaFacturaCrud;
         this.productoICrud = productoICrud;
         this.categoriaCrud = categoriaCrud;
+        this.clienteControlador = clienteControlador;
         
         try {
             this.facturaGrilla = new FacturaGrilla(
@@ -86,6 +91,13 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(this, "Error al cargar las categorias", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            DefaultComboBoxModel clienteComboBoxModel = new DefaultComboBoxModel(this.clienteControlador.listar().toArray());
+            this.clienteComboBox.setModel(clienteComboBoxModel);
+        } catch (Exception e) {
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error al cargar los clientes", "Error", JOptionPane.ERROR_MESSAGE);
         }
         this.FacturasTable.getColumnModel().getColumn(0).setPreferredWidth(15);
         this.FacturasTable.getColumnModel().getColumn(0).setResizable(false);
@@ -138,6 +150,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         cantidadText1 = new javax.swing.JLabel();
         cantidadText2 = new javax.swing.JLabel();
         cancelarEditButton = new javax.swing.JButton();
+        clienteComboBox = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setForeground(java.awt.Color.gray);
@@ -343,6 +356,13 @@ public class AbmFactura extends javax.swing.JInternalFrame {
             }
         });
 
+        clienteComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        clienteComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clienteComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -358,8 +378,10 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                                 .addComponent(productNameFilterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cantidadText2)
-                                    .addComponent(categoriaFilterComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(categoriaFilterComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cantidadText2)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cantidadProductoSpinner)
@@ -368,7 +390,8 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                                     .addComponent(productNameText)
                                     .addComponent(productPriceText)
                                     .addComponent(productIdText))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(clienteComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cantidadText)
@@ -437,7 +460,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(productNameFilterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(categoriaFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -447,13 +470,15 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(productPriceText)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(productIdText)))))
+                                .addComponent(productIdText)
+                                .addGap(18, 18, 18)
+                                .addComponent(clienteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(237, 237, 237))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(255, 255, 255)
                     .addComponent(cantidadText1)
-                    .addContainerGap(517, Short.MAX_VALUE)))
+                    .addContainerGap(547, Short.MAX_VALUE)))
         );
 
         pack();
@@ -461,10 +486,11 @@ public class AbmFactura extends javax.swing.JInternalFrame {
 
     private void CreateFacturaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateFacturaButtonActionPerformed
         Factura emptyFactura = new Factura(
-            null,
-            new Date(),
-            null,
-            (TipoDePagoDeFactura) this.selectorDeTipoDePago.getSelectedItem()
+                null,
+                new Date(),
+                new ArrayList<LineaFactura>(),
+                (TipoDePagoDeFactura) this.selectorDeTipoDePago.getSelectedItem(),
+                (Cliente) this.clienteComboBox.getSelectedItem()
         );
         try{
 
@@ -485,6 +511,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private void updateFacturaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFacturaButtonActionPerformed
         try {
             this.selectedFactura.setTypeOfPayment((TipoDePagoDeFactura) this.selectorDeTipoDePago.getSelectedItem());
+            this.selectedFactura.setCliente((Cliente) this.clienteComboBox.getSelectedItem());
 
             this.facturaCrud.modificar(this.selectedFactura);
         } catch (Exception e) {
@@ -548,9 +575,11 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private void updateFacturaUIComponents(){
         if(this.selectedFactura == null){
             this.modelCombo.setSelectedItem(TipoDePagoDeFactura.CONTADO);
+            this.clienteComboBox.setSelectedItem(null);
         }else{
             this.modelCombo.setSelectedItem(this.selectedFactura.getTypeOfPayment());
             this.selectedFacturaIdText.setText("Selected id: " + this.selectedFactura.getId());
+            this.clienteComboBox.setSelectedItem(this.selectedFactura.getCliente());
         }
 
         refreshLineaFacturaTable();
@@ -566,6 +595,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private void lineaFacturaTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lineaFacturaTableMouseClicked
         Integer selectedRow = this.lineaFacturaTable.getSelectedRow();
         LineaFactura lineaFactura = this.lineaGrilla.getLineaFacturaByIndex(selectedRow);
+        this.clienteSeleccionado = this.selectedFactura.getCliente();
         this.selectedLineaFactura = lineaFactura;
 
         refreshLineaFacturaUIComponents();
@@ -712,6 +742,10 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_categoriaFilterComboBoxActionPerformed
 
+    private void clienteComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clienteComboBoxActionPerformed
+
     private void clearLineaFacturaSelection() {
         this.selectedLineaFactura = null;
         this.lineaFacturaTable.clearSelection();
@@ -790,6 +824,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private javax.swing.JLabel cantidadText1;
     private javax.swing.JLabel cantidadText2;
     private javax.swing.JComboBox<String> categoriaFilterComboBox;
+    private javax.swing.JComboBox<String> clienteComboBox;
     private javax.swing.JButton deleteLineaButton;
     private javax.swing.JButton eliminarFacturaButton;
     private javax.swing.JLabel jLabel2;

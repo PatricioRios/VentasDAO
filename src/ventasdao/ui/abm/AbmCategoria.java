@@ -243,7 +243,8 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
 
                 try {
 
-                    TablaDeCategorias.setModel(new GrillaCategoria((ArrayList<Categoria>) categoriaControlador.listar()));
+                    grillaCategoria = new GrillaCategoria((ArrayList<Categoria>) categoriaControlador.listar());
+                    TablaDeCategorias.setModel(grillaCategoria);
 
                 } catch (Exception e) {
 
@@ -290,7 +291,8 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
             }
 
             try {
-                TablaDeCategorias.setModel(new GrillaCategoria((ArrayList<Categoria>) categoriaControlador.listar()));
+                grillaCategoria = new GrillaCategoria((ArrayList<Categoria>) categoriaControlador.listar());
+                TablaDeCategorias.setModel(grillaCategoria);
             } catch (Exception ex) {
                 Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "Error al cargar las categorias", "Error", JOptionPane.ERROR_MESSAGE);
@@ -318,7 +320,8 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                 try {
                     categoriaControlador.eliminar(categoria);
                     limpiarCampos();
-                    TablaDeCategorias.setModel(new GrillaCategoria((ArrayList<Categoria>) categoriaControlador.listar()));
+                    grillaCategoria = new GrillaCategoria((ArrayList<Categoria>) categoriaControlador.listar());
+                    TablaDeCategorias.setModel(grillaCategoria);
                 } catch (Exception ex) {
                     Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(this, "Error al eliminar la categoria", "Error", JOptionPane.ERROR_MESSAGE);

@@ -318,7 +318,7 @@ ALTER SEQUENCE public.categorias_id_seq OWNED BY public.categorias.id;
 CREATE TABLE public.clientes (
     id integer NOT NULL,
     nombre character varying(60) NOT NULL,
-    cuil character varying(12) NOT NULL,
+    cuil character varying(13) NOT NULL,
     apellido character varying(60),
     fecha_nacimiento date,
     tipo_cliente_id integer NOT NULL
@@ -543,38 +543,11 @@ ALTER TABLE ONLY public.tipo_cliente ALTER COLUMN id SET DEFAULT nextval('public
 --
 
 COPY public.categorias (id, denominacion, descripcion) FROM stdin;
-\.
-
-
---
--- Data for Name: clientes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.clientes (id, nombre, cuil, razon_social, tipo_cliente_id) FROM stdin;
-\.
-
-
---
--- Data for Name: factura; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.factura (id, date, cliente_id, forma_de_pago) FROM stdin;
-\.
-
-
---
--- Data for Name: linea_factura; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.linea_factura (id, cantidad, producto_id, factura_id) FROM stdin;
-\.
-
-
---
--- Data for Name: productos; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.productos (id, categoria_id, nombre, stock_minimo, stock_maximo, precio, descripcion, fecha_creacion) FROM stdin;
+1	Lacteos	Productos derivados de la leche
+2	Panificados	Productos de panaderia
+3	Bebidas	Bebidas con y sin alcohol
+4	Limpieza	Articulos de limpieza
+5	Carnes	Carnes rojas y blancas
 \.
 
 
@@ -583,6 +556,57 @@ COPY public.productos (id, categoria_id, nombre, stock_minimo, stock_maximo, pre
 --
 
 COPY public.tipo_cliente (id, nombre, descripcion) FROM stdin;
+1	Consumidor Final	Cliente que compra para consumo propio
+2	Responsable Inscripto	Cliente con CUIT
+3	Monotributista	Cliente bajo régimen de Monotributo
+4	Exento	Cliente exento de IVA
+5	No Responsable	Cliente no responsable de IVA
+\.
+
+
+--
+-- Data for Name: clientes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.clientes (id, nombre, cuil, apellido, fecha_nacimiento, tipo_cliente_id) FROM stdin;
+1	Juan	20-12345678-5	Perez	1990-01-15	1
+2	Maria	27-87654321-5	Gomez	1985-05-20	2
+\.
+
+
+--
+-- Data for Name: productos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.productos (id, categoria_id, nombre, stock_minimo, stock_maximo, precio, descripcion, fecha_creacion) FROM stdin;
+1	1	Leche	10	100	100	Leche entera	2025-11-19
+2	1	Queso	5	50	200	Queso cremoso	2025-11-19
+3	2	Pan	20	200	50	Pan felipe	2025-11-19
+4	3	Gaseosa	15	150	120	Bebida gaseosa sabor cola	2025-11-19
+5	4	Lavandina	10	100	80	Lavandina concentrada	2025-11-19
+6	5	Asado	5	50	500	Corte de carne para asado	2025-11-19
+7	1	Yogurt	10	100	90	Yogurt de frutilla	2025-11-19
+\.
+
+
+--
+-- Data for Name: factura; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.factura (id, date, cliente_id, tipo_pago) FROM stdin;
+1	2025-11-19	1	CONTADO
+2	2025-11-19	2	DEBITO
+\.
+
+
+--
+-- Data for Name: linea_factura; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.linea_factura (id, cantidad, producto_id, factura_id) FROM stdin;
+1	2	1	1
+2	1	2	1
+3	5	3	2
 \.
 
 
@@ -590,42 +614,42 @@ COPY public.tipo_cliente (id, nombre, descripcion) FROM stdin;
 -- Name: categorias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categorias_id_seq', 1, false);
+SELECT pg_catalog.setval('public.categorias_id_seq', 5, true);
 
 
 --
 -- Name: clientes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.clientes_id_seq', 1, false);
+SELECT pg_catalog.setval('public.clientes_id_seq', 2, true);
 
 
 --
 -- Name: factura_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.factura_id_seq', 1, false);
+SELECT pg_catalog.setval('public.factura_id_seq', 2, true);
 
 
 --
 -- Name: linea_factura_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.linea_factura_id_seq', 1, false);
+SELECT pg_catalog.setval('public.linea_factura_id_seq', 3, true);
 
 
 --
 -- Name: productos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.productos_id_seq', 1, false);
+SELECT pg_catalog.setval('public.productos_id_seq', 7, true);
 
 
 --
 -- Name: tipo_cliente_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.tipo_cliente_id_seq', 1, false);
+SELECT pg_catalog.setval('public.tipo_cliente_id_seq', 5, true);
 
 
 --

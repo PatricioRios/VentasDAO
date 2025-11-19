@@ -12,7 +12,7 @@ import javax.swing.*;
 
 import sun.net.util.ProxyUtil;
 import ventasdao.controladores.ICrud;
-import ventasdao.controladores.mocks.ProductoControladorMock;
+import ventasdao.controladores.ProductoControlador;
 import ventasdao.objetos.Categoria;
 import ventasdao.objetos.Producto;
 import ventasdao.ui.grilla.GrillaProducto;
@@ -23,14 +23,14 @@ import ventasdao.ui.grilla.GrillaProducto;
  */
 public class AbmProducto extends javax.swing.JInternalFrame {
     
-    private ProductoControladorMock productoControlador;
+    private ProductoControlador productoControlador;
     private ICrud<Categoria> categoriaControlador;
     private GrillaProducto grillaProducto;
     private DefaultComboBoxModel modelCombo;
 
     private Producto productSelected;
   
-    public AbmProducto(ProductoControladorMock productoControlador, ICrud<Categoria> categoriaControlador) {
+    public AbmProducto(ProductoControlador productoControlador, ICrud<Categoria> categoriaControlador) {
         this.productoControlador = productoControlador;
         this.categoriaControlador = categoriaControlador;
         initComponents();
