@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.List;
 
 import ventasdao.dominio.Conexion;
 import ventasdao.objetos.Cliente;
@@ -23,23 +24,23 @@ import ventasdao.objetos.Cliente;
  * @author Hugo Chanampe
  */
 public class ClienteControlador implements ICrud<Cliente>{
-    
+
     private Connection connection;
-    
+
     private Statement stmt;
-    
+
     private PreparedStatement ps;
-    
+
     private ResultSet rs;
-    
+
     private String sql;
-    
-    
+
+
 
     //public void modificarCategoria(Categoria c);
     //public Categoria obtenerCategoria(Integer id);
     //public void eliminarCategoria(Categoria c);
-    
+
     @Override
     public boolean crear(Cliente entidad) throws SQLException, Exception{
 
@@ -55,7 +56,8 @@ public class ClienteControlador implements ICrud<Cliente>{
             ps.setInt(5, entidad.getTipoCliente().getId());
             ps.executeUpdate();
             connection.close();
-            
+            return true;
+
 
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,57 +66,121 @@ public class ClienteControlador implements ICrud<Cliente>{
     }
 
     @Override
-    public boolean eliminar(Cliente entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean eliminar(Cliente entidad) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        this.sql = "DELETE FROM clientes WHERE id = ?";
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, entidad.getId());
+        int filasAfectadas = ps.executeUpdate();
+        connection.close();
+        return filasAfectadas > 0;
     }
 
     @Override
     public ArrayList<Cliente> listar() throws SQLException,Exception{
-        
-     connection = Conexion.obtenerConexion ();
+
+        connection = Conexion.obtenerConexion ();
+        TipoClienteControlador tipoClienteControlador = new TipoClienteControlador();
         try{
-            
+
             this.stmt = connection.createStatement();
             this.sql = "SELECT * FROM clientes";
             this.rs   = stmt.executeQuery(sql);
-            connection.close();
             
+
             ArrayList<Cliente> clientes = new ArrayList();
-            
+
             while(rs.next()){
-                
+
                 Cliente cliente = new Cliente();
-                
+
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setCuil(rs.getString("cuil"));
                 cliente.setId(rs.getInt("id"));
                 cliente.setApellido (rs.getString("apellido"));
                 cliente.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
-
+                cliente.setTipoCliente(tipoClienteControlador.extraer(rs.getInt("tipo_cliente_id")));
+                //System.out.println(cliente);
 
                 clientes.add(cliente);
-                
+
             }
             //System.out.println(cont);
+            connection.close();
             return clientes;
         } catch(SQLException ex){
             ex.printStackTrace();
         }
         return null;
-    
+
 
     }
 
     @Override
-    public boolean modificar(Cliente entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean modificar(Cliente entidad) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        this.sql = "UPDATE clientes SET nombre = ?, apellido = ?, cuil = ?, fecha_nacimiento = ?, tipo_cliente_id = ? WHERE id = ?";
+
+        Date fecha = new Date(entidad.getFechaNacimiento().getTime());
+
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, entidad.getNombre());
+        ps.setString(2, entidad.getApellido());
+        ps.setString(3, entidad.getCuil());
+        ps.setDate(4, fecha);
+        ps.setInt(5, entidad.getTipoCliente().getId());
+        ps.setInt(6, entidad.getId());
+
+        ps.executeUpdate();
+        connection.close();
+        return true;
     }
 
     @Override
-    public Cliente extraer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente extraer(int id) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        sql = "SELECT * FROM clientes WHERE id = ?";
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        this.rs = ps.executeQuery();
+        TipoClienteControlador tipoClienteControlador = new TipoClienteControlador();
+
+        if (rs.next()) {
+            Cliente cliente = new Cliente();
+            cliente.setId(id);
+            cliente.setNombre(rs.getString("nombre"));
+            cliente.setApellido(rs.getString("apellido"));
+            cliente.setCuil(rs.getString("cuil"));
+            cliente.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+            cliente.setTipoCliente(tipoClienteControlador.extraer(rs.getInt("tipo_cliente_id")));
+            connection.close();
+            return cliente;
+        }
+        connection.close();
+        return null;
+    }
+    public List<Cliente> listarPorApellido(String prefijo) throws SQLException, Exception {
+        connection = Conexion.obtenerConexion();
+        sql = "SELECT * FROM clientes WHERE apellido ILIKE ?";
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, prefijo + "%");
+        rs = ps.executeQuery();
+        connection.close();
+
+        List<Cliente> lista = new ArrayList<>();
+        while (rs.next()) {
+            Cliente c = new Cliente();
+            c.setId(rs.getInt("id"));
+            c.setNombre(rs.getString("nombre"));
+            c.setApellido(rs.getString("apellido"));
+            c.setCuil(rs.getString("cuil"));
+            c.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+            lista.add(c);
+        }
+
+        return lista;
     }
 
-    
-    
+
+
 }

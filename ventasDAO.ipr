@@ -3,6 +3,12 @@
   <component name="AgentMigrationStateService">
     <option name="migrationStatus" value="COMPLETED" />
   </component>
+  <component name="Ask2AgentMigrationStateService">
+    <option name="migrationStatus" value="COMPLETED" />
+  </component>
+  <component name="AskMigrationStateService">
+    <option name="migrationStatus" value="COMPLETED" />
+  </component>
   <component name="EditMigrationStateService">
     <option name="migrationStatus" value="COMPLETED" />
   </component>

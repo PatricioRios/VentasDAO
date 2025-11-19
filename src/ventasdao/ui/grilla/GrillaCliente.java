@@ -62,7 +62,7 @@ public class GrillaCliente extends AbstractTableModel{
             case 0: return "ID";
             case 1: return "NOMBRE";
             case 2: return "CUIL";
-            case 3: return "Razon Social";
+            case 3: return "APELLIDO";
             case 4: return "Fecha Nacimiento";
             default: return "";
         

@@ -11,8 +11,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import jdk.jfr.internal.tool.Main;
+import ventasdao.controladores.CategoriaControlador;
+import ventasdao.controladores.ClienteControlador;
+import ventasdao.controladores.FacturaControlador;
 import ventasdao.controladores.ICrud;
-import ventasdao.controladores.mocks.*;
+import ventasdao.controladores.LineaFacturaControlador;
+import ventasdao.controladores.ProductoControlador;
+import ventasdao.controladores.TipoClienteControlador;
 import ventasdao.objetos.Categoria;
 import ventasdao.objetos.Cliente;
 import ventasdao.objetos.Factura;
@@ -42,9 +47,9 @@ public class Principal extends javax.swing.JFrame {
 
         private ICrud<Factura> facturaCrud;
 
-        private LineaFacturaControladorMock lineaFacturaControlador;
+        private LineaFacturaControlador lineaFacturaControlador;
 
-        private ProductoControladorMock productoControladorMock;
+    private ProductoControlador productoControlador;
 
         private ICrud<TipoCliente> tipoClienteICrud;
 
@@ -62,27 +67,19 @@ public class Principal extends javax.swing.JFrame {
 
         public Principal() {
 
-            this.lineaFacturaControlador = new LineaFacturaControladorMock();
+            this.lineaFacturaControlador = new LineaFacturaControlador();
 
-            this.facturaCrud = new FacturaControladorMock();
+        this.facturaCrud = new FacturaControlador();
 
-            this.categoriaCrud = new CategoriaControladorMock();
+        this.categoriaCrud = new CategoriaControlador();
 
-            this.tipoClienteICrud = new TipoClienteControladorMock();
+        this.tipoClienteICrud = new TipoClienteControlador();
 
-            this.clienteControlador = new ClienteControladorMock();
+        this.clienteControlador = new ClienteControlador();
 
-            try {
-
-                this.productoControladorMock = new ProductoControladorMock();
-
-            } catch (Exception e) {
-
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, e);
-                JOptionPane.showMessageDialog(this, "Error al inicializar el controlador de productos", "Error", JOptionPane.ERROR_MESSAGE);
-
-            }
-            initComponents();
+        this.productoControlador = new ProductoControlador();
+        
+        initComponents();
         }
 
     
@@ -376,7 +373,7 @@ public class Principal extends javax.swing.JFrame {
             private void navToScreen(Pantallas pantalla){
                 switch (pantalla){
                     case PRODUCTO:{
-                        AbmProducto abmProducto = new AbmProducto(this.productoControladorMock, this.categoriaCrud);
+                        AbmProducto abmProducto = new AbmProducto(this.productoControlador, this.categoriaCrud);
                         setCurrentFrame(abmProducto);
                         break;
                     }
@@ -384,8 +381,9 @@ public class Principal extends javax.swing.JFrame {
                         AbmFactura facturaScreen = new AbmFactura(
                                 this.facturaCrud,
                                 this.lineaFacturaControlador,
-                                this.productoControladorMock,
-                                this.categoriaCrud
+                                this.productoControlador,
+                                this.categoriaCrud,
+                                this.clienteControlador
                         );
                         setCurrentFrame(facturaScreen);
                         break;

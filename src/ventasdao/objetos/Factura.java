@@ -24,24 +24,29 @@ public class Factura {
     
     private TipoDePagoDeFactura typeOfPayment;
 
-    public Factura(Integer id, Date date, List<LineaFactura> lineaFactura, TipoDePagoDeFactura typeOfPayment) {
+    private Cliente cliente;
+
+    public Factura(Integer id, Date date, List<LineaFactura> lineaFactura, TipoDePagoDeFactura typeOfPayment, Cliente cliente) {
 
         validarCampos(
                 Optional.ofNullable(id),
                 Optional.ofNullable(date),
-                typeOfPayment
+                typeOfPayment,
+                Optional.ofNullable(cliente)
         );
 
         this.id = id;
         this.date = date;
         this.lineaFactura = lineaFactura;
         this.typeOfPayment = typeOfPayment;
+        this.cliente = cliente;
     }
 
     private void validarCampos(
             Optional<Integer> id,
             Optional<Date> date,
-            TipoDePagoDeFactura typeOfPayment
+            TipoDePagoDeFactura typeOfPayment,
+            Optional<Cliente> cliente
             ) {
         id.ifPresent(i -> {
                 if (i < 0) {
@@ -56,6 +61,17 @@ public class Factura {
         if(typeOfPayment == null) {
             throw new IllegalArgumentException("El tipo de pago no puede ser nulo");
         }
+        if(cliente == null || !cliente.isPresent()) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo");
+        }
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public TipoDePagoDeFactura getTypeOfPayment() {
