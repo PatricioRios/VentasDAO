@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import org.postgresql.util.PSQLException;
+import org.postgresql.util.PSQLException;
 import ventasdao.controladores.ClienteControlador;
 import ventasdao.controladores.ICrud;
 import ventasdao.controladores.TipoClienteControlador;
@@ -298,8 +300,12 @@ public class AbmCliente extends javax.swing.JInternalFrame {
                     resetFields();
                     refreshTable();
                 } catch (Exception ex) {
-                    Logger.getLogger(AbmCliente.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "Error al eliminar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (ex instanceof PSQLException && ((PSQLException) ex).getSQLState().equals("23503")) {
+                        JOptionPane.showMessageDialog(this, "No se puede eliminar el cliente porque tiene facturas asociadas.", "Error de eliminación", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Logger.getLogger(AbmCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "Error al eliminar el cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         } else {

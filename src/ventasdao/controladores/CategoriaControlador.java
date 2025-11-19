@@ -98,18 +98,11 @@ public class CategoriaControlador implements ICrud<Categoria>{
     public boolean eliminar(Categoria entidad) throws SQLException, Exception {
         connection = Conexion.obtenerConexion();
         this.sql = "DELETE FROM categorias WHERE id = ?";
-
-        try {
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, entidad.getId());
-            int filasAfectadas = ps.executeUpdate();
-            connection.close();
-            return filasAfectadas > 0;
-        } catch (SQLException ex) {
-            Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return false;
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, entidad.getId());
+        int filasAfectadas = ps.executeUpdate();
+        connection.close();
+        return filasAfectadas > 0;
     }
 
     @Override

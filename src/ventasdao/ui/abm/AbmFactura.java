@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
+import org.postgresql.util.PSQLException;
 import ventasdao.controladores.ICrud;
 import ventasdao.controladores.LineaFacturaControlador;
 import ventasdao.controladores.ProductoControlador;
@@ -544,17 +545,15 @@ public class AbmFactura extends javax.swing.JInternalFrame {
             if (response == JOptionPane.YES_OPTION) {
                 try {
                     this.facturaCrud.eliminar(this.selectedFactura);
-                } catch (Exception e) {
-                    Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
-                    JOptionPane.showMessageDialog(this, "Error al eliminar la factura", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-
-                try {
                     this.facturaGrilla = new FacturaGrilla(this.facturaCrud.listar());
                     this.FacturasTable.setModel(this.facturaGrilla);
-                } catch (Exception ex) {
-                    Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "Error al cargar las facturas", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception e) {
+                    if (e instanceof PSQLException && ((PSQLException) e).getSQLState().equals("23503")) {
+                        JOptionPane.showMessageDialog(this, "No se puede eliminar la factura porque tiene líneas de factura asociadas.", "Error de eliminación", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, e);
+                        JOptionPane.showMessageDialog(this, "Error al eliminar la factura", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }

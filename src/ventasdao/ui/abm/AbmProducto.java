@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 import sun.net.util.ProxyUtil;
+import org.postgresql.util.PSQLException;
 import ventasdao.controladores.ICrud;
 import ventasdao.controladores.ProductoControlador;
 import ventasdao.objetos.Categoria;
@@ -285,8 +286,12 @@ public class AbmProducto extends javax.swing.JInternalFrame {
                     limpiarCampos();
                     updateGrilla();
                 } catch (Exception ex) {
-                    Logger.getLogger(AbmProducto.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "Error al eliminar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (ex instanceof PSQLException && ((PSQLException) ex).getSQLState().equals("23503")) {
+                        JOptionPane.showMessageDialog(this, "No se puede eliminar el producto porque está siendo utilizado en una o más facturas.", "Error de eliminación", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Logger.getLogger(AbmProducto.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "Error al eliminar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         } else {

@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import org.postgresql.util.PSQLException;
+import org.postgresql.util.PSQLException;
 import ventasdao.controladores.CategoriaControlador;
 import ventasdao.controladores.ICrud;
 import ventasdao.objetos.Categoria;
@@ -323,8 +325,12 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                     grillaCategoria = new GrillaCategoria((ArrayList<Categoria>) categoriaControlador.listar());
                     TablaDeCategorias.setModel(grillaCategoria);
                 } catch (Exception ex) {
-                    Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "Error al eliminar la categoria", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (ex instanceof PSQLException && ((PSQLException) ex).getSQLState().equals("23503")) {
+                        JOptionPane.showMessageDialog(this, "No se puede eliminar la categoría porque está siendo utilizada por uno o más productos.", "Error de eliminación", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "Error al eliminar la categoría.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         } else {

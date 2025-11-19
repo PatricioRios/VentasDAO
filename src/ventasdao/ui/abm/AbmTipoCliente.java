@@ -5,6 +5,7 @@
 package ventasdao.ui.abm;
 
 import javax.swing.JOptionPane;
+import org.postgresql.util.PSQLException;
 import ventasdao.controladores.ICrud;
 import ventasdao.objetos.TipoCliente;
 import ventasdao.ui.grilla.TipoClienteGrilla;
@@ -239,8 +240,12 @@ public class AbmTipoCliente extends javax.swing.JInternalFrame {
                     this.tipoClienteGrilla = new TipoClienteGrilla(this.tipoClienteControlador.listar());
                     tipoClienteTable.setModel(tipoClienteGrilla);
                 } catch (Exception e) {
-                    Logger.getLogger(AbmTipoCliente.class.getName()).log(Level.SEVERE, null, e);
-                    JOptionPane.showMessageDialog(this, "Error al eliminar el tipo de cliente", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (e instanceof PSQLException && ((PSQLException) e).getSQLState().equals("23503")) {
+                        JOptionPane.showMessageDialog(this, "No se puede eliminar el tipo de cliente porque está siendo utilizado por uno o más clientes.", "Error de eliminación", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Logger.getLogger(AbmTipoCliente.class.getName()).log(Level.SEVERE, null, e);
+                        JOptionPane.showMessageDialog(this, "Error al eliminar el tipo de cliente", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }
